@@ -1,0 +1,158 @@
+apply plugin: 'com.android.application'
+Properties properties=new Properties();
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    signingConfigs {
+        video {
+            keyAlias '1'
+            keyPassword '123456'
+            storeFile file('via_pay_sign.keystore')
+            storePassword '123456'
+
+
+//            storeFile file("bhi.jks")
+//            storePassword System.console().readLine("\nKeystore password: ")
+//            keyAlias "bhi"
+//            keyPassword System.console().readLine("\nKey password: ")
+//            if(System.console() != null)
+//                System.console().readLine("\nKeystore password: ")
+//            keyAlias "msq"
+//            keyPassword
+//            if(System.console() != null)
+//                System.console().readLine("\nKey password: ")
+//
+        }
+    }
+    defaultConfig {
+        applicationId properties.getProperty("debug")
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 8
+        versionName "4.6"
+        signingConfig signingConfigs.video
+    }
+    buildTypes {
+        release {
+            //混淆
+            minifyEnabled true
+            //zipalign优化
+            zipAlignEnabled true
+            // dex突破65535的限制
+            multiDexEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            //加载默认混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.video
+        }
+    }
+    productFlavors {
+//        sing016 {
+//            applicationId properties.getProperty("debug")
+//            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+//            manifestPlaceholders.put("CHANNEL_VALUE","5085_279_14926_899")
+//        }
+        ces{
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","5202_279_15443_899")
+        }
+        sing015 {
+//            applicationId properties.getProperty("sing015")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4994_279_14927_899")
+        }
+        sing014 {
+//            applicationId properties.getProperty("sing014")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4993_279_14928_899")
+        }
+        sing013 {
+//            applicationId properties.getProperty("sing013")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4992_279_14929_899")
+        }
+        sing012 {
+//            applicationId properties.getProperty("sing012")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4991_279_14930_899")
+        }
+        sing011 {
+//            applicationId properties.getProperty("sing011")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4990_279_14931_899")
+        }
+        sing010 {
+//            applicationId properties.getProperty("sing010")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4989_279_14932_899")
+        }
+        sing009 {
+//            applicationId properties.getProperty("sing009")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4988_279_14933_899")
+        }
+        sing008 {
+//            applicationId properties.getProperty("sing008")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4987_279_14934_899")
+        }
+        sing007 {
+//            applicationId properties.getProperty("sing007")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4986_279_14935_899")
+        }
+        sing006 {
+//            applicationId properties.getProperty("sing006")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4985_279_14936_899")
+        }
+        sing005 {
+//            applicationId properties.getProperty("sing005")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4984_279_14937_899")
+        }
+        sing004 {
+//            applicationId properties.getProperty("sing004")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4983_279_14938_899")
+        }
+        sing003 {
+//            applicationId properties.getProperty("sing003")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4982_279_14939_899")
+        }
+        sing002 {
+//            applicationId properties.getProperty("sing002")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4981_279_14940_899")
+        }
+        sing001 {
+//            applicationId properties.getProperty("sing001")
+            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+            manifestPlaceholders.put("CHANNEL_VALUE","4950_279_12111_899")
+        }
+
+
+    }
+
+    sourceSets {
+        main {
+            //jni库的调用会到资源文件夹下libs里面找so文件
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile files('libs/volly-1.0.11.jar')
+    compile files('libs/gson-2.6.2.jar')
+    compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile files('libs/umeng-analytics-v5.6.7.jar')
+    compile files('libs/alipaySdk-20160516.jar')
+    compile files('libs/via_pay_sdk_v1.jar')
+    compile files('libs/wftsdk2.0.jar')
+}

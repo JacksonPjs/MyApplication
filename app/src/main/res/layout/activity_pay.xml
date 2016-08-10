@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:background="@mipmap/user_logo" />
+
+
+
+    </FrameLayout>
+    <RelativeLayout
+        android:id="@+id/styleexit"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="永久会员"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:textSize="16sp"
+
+
+            android:gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/costtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="25dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:text="原价：58元" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="15dp"
+            android:text="29元"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp" />
+    </RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/style"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="月费会员"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:textSize="16sp"
+
+
+            android:gravity="center_vertical"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="25dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:text="38元" />
+
+        <RadioButton
+            android:id="@+id/mvip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/pay_type_selector"
+            android:paddingBottom="15dp"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年费会员"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:textSize="16sp"
+
+
+            android:gravity="center_vertical"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="25dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:text="48元" />
+
+        <RadioButton
+            android:id="@+id/yvip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/pay_type_selector"
+            android:paddingBottom="15dp"
+            android:checked="true"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="永久会员"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:textSize="16sp"
+
+
+            android:gravity="center_vertical"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="25dp"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:text="58元" />
+
+        <RadioButton
+            android:id="@+id/lvip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/pay_type_selector"
+            android:paddingBottom="15dp"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp" />
+    </RelativeLayout>
+</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="选择支付方式" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:drawableLeft="@mipmap/pay_type_wx"
+            android:drawablePadding="15dp"
+            android:gravity="center_vertical"
+            android:text="微信支付" />
+
+        <RadioButton
+            android:id="@+id/wxBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/pay_type_selector"
+            android:checked="true"
+            android:paddingBottom="15dp"
+            android:paddingRight="25dp"
+            android:paddingTop="15dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:drawableLeft="@mipmap/pay_type_qq"
+            android:drawablePadding="15dp"
+            android:gravity="center_vertical"
+            android:text="QQ支付" />
+
+        <RadioButton
+            android:id="@+id/qqBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/pay_type_selector"
+            android:paddingBottom="10dp"
+            android:paddingRight="25dp"
+            android:paddingTop="10dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:drawableLeft="@mipmap/pay_type_alipay"
+            android:drawablePadding="15dp"
+            android:gravity="center_vertical"
+            android:text="支付宝" />
+
+        <RadioButton
+            android:id="@+id/aliBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/pay_type_selector"
+            android:paddingBottom="10dp"
+            android:paddingRight="25dp"
+            android:paddingTop="10dp" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/okBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/pay_btn"
+        android:paddingBottom="10dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="10dp"
+        android:text="确认支付"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
+</LinearLayout>
