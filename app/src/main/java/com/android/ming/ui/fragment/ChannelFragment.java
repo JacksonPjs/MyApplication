@@ -1,6 +1,7 @@
 package com.android.ming.ui.fragment;
 
 import android.support.v7.widget.GridLayoutManager;
+import android.util.Log;
 import android.view.View;
 
 import com.android.ming.bean.Channel;
@@ -45,6 +46,7 @@ public class ChannelFragment extends RefreshableFragment implements IChannelView
     public void showList(List<Channel> channels) {
         refreshLayout.setRefreshing(false);
         adapter.refreshData(channels);
+        activity.showHomeData(channels);
     }
 
     @Override
@@ -55,6 +57,7 @@ public class ChannelFragment extends RefreshableFragment implements IChannelView
 
     @Override
     public void onItemClick(View v, int position) {
+
         startActivity(ListActivity.createIntent(activity, adapter.getItem(position).getId(), adapter.getItem(position).getTitle()));
     }
 }

@@ -1,10 +1,12 @@
 package com.android.ming.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by KingYang on 16/4/15.
  * E-Mail: admin@kingyang.cn
  */
-public class Channel {
+public class Channel implements Serializable{
     private int id;// 频道ID
     private String title;// 标题
     private String face;// 封面

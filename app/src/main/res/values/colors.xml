@@ -10,9 +10,16 @@
     <color name="pay_btn">#f06e1a</color>
     <color name="tran">#40000000</color>
     <color name="pay_bg">#3d0a13</color>
+    <color name="textColor">#808080</color>
 
 
     <color name="white_gray">#EEEEEE</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="myred">#eb4f38</color>
+    <color name="darkgray">#cccc</color>
+    <color name="color_white">#ffffff</color>
+    <color name="btn_press_color">#5677fc</color>
+    <color name="btn_pressed_color">#3ca0ec</color>
     <!-- 支付成功 -->
 </resources>

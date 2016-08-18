@@ -54,6 +54,36 @@ android {
 //            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
 //            manifestPlaceholders.put("CHANNEL_VALUE","5085_279_14926_899")
 //        }
+//        bus005 {
+////            applicationId properties.getProperty("ping010")
+//            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+//            manifestPlaceholders.put("CHANNEL_VALUE", "5344_279_16401_899")
+//        }
+//        bus006 {
+////            applicationId properties.getProperty("ping010")
+//            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+//            manifestPlaceholders.put("CHANNEL_VALUE", "5347_279_16400_899")
+//        }
+//        bus007 {
+////            applicationId properties.getProperty("ping010")
+//            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+//            manifestPlaceholders.put("CHANNEL_VALUE", "5349_279_16399_899")
+//        }
+//        bus008 {
+////            applicationId properties.getProperty("ping010")
+//            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+//            manifestPlaceholders.put("CHANNEL_VALUE", "5352_279_16397_899")
+//        }
+//        bus009 {
+////            applicationId properties.getProperty("ping010")
+//            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+//            manifestPlaceholders.put("CHANNEL_VALUE", "5351_279_16398_899")
+//        }
+//        bus010 {
+////            applicationId properties.getProperty("ping010")
+//            manifestPlaceholders = [APP_CHANNEL_VALUE: name]
+//            manifestPlaceholders.put("CHANNEL_VALUE", "5353_279_16396_899")
+//        }
         ces{
             manifestPlaceholders = [APP_CHANNEL_VALUE: name]
             manifestPlaceholders.put("CHANNEL_VALUE","5202_279_15443_899")

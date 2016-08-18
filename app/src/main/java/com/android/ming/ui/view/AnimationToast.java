@@ -46,7 +46,7 @@ public class AnimationToast {
 
         public void show()
         {
-                mPopToast.showAtLocation(mParent, Gravity.TOP, 0, 0);
+                mPopToast.showAtLocation(mParent, Gravity.TOP, 0, 250);
 
                 //LONG→2000ms    SHORT→1000ms
                 long duration = mDuration== LENGTH_LONG ? 2000 : 1000;

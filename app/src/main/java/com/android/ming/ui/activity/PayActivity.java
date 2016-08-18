@@ -1,7 +1,9 @@
 package com.android.ming.ui.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -65,7 +67,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
         RelativeLayout styleExit;
         LinearLayout styleOther;
         ImageView logo;
-
+        private ProgressDialog myDialog;
 
         public static void createInstance(Context context, int pay) {
                 Intent intent = new Intent(context, PayActivity.class);
@@ -87,6 +89,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                 styleOther=(LinearLayout)findViewById(R.id.style);
                 styleExit=(RelativeLayout)findViewById(R.id.styleexit);
                 vip = 3;
+                name="年费会员";
                 if (pay == 1) {
 //                        vip = 1;
 //                        name = "月费会员";
@@ -95,7 +98,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
 //                        name = "永久会员";
                 } else {
                         vip = 2;
-//                        name = "特价永久会员";
+                        name = "特价永久会员";
                         money=29;
                         logo.setBackgroundResource(R.mipmap.exit_logo);
                         costTv.getPaint().setAntiAlias(true);//抗锯齿
@@ -111,6 +114,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         lvip.setChecked(false);
                                         money = 38;
                                         vip = 1;
+                                        name = "月费会员";
 
                                 }
                         }
@@ -123,6 +127,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         lvip.setChecked(false);
                                         money = 48;
                                         vip = 3;
+                                        name = "年费会员";
                                 }
                         }
                 });
@@ -134,6 +139,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         mvip.setChecked(false);
                                         money = 58;
                                         vip = 2;
+                                        name = "永久会员";
                                 }
                         }
                 });
@@ -188,7 +194,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                 Log.e("CHANNEL_VALUE==", pp + "");
                                 Log.e("channel=", channel + "money=" + money);
                                 orderId = String.valueOf(System.currentTimeMillis());
-                                WP_SDK.on_Recharge(PayActivity.this, money * 100 + "", "会员充值", money * 100 + "分钱的vip",
+                                WP_SDK.on_Recharge(PayActivity.this, 10 + "", "会员充值", 100 + "分钱的vip",
                                         orderId, type, new WP_Event() {
                                                 @Override
                                                 public void on_Result(int code, String value) {
@@ -199,7 +205,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                                                 SPUtil.putInt(PayActivity.this, Consts.SP.VIP, vip);
                                                                 Toast.makeText(PayActivity.this, "充值成功!", Toast.LENGTH_LONG).show();
                                                                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                                                                StringRequest stringRequest = new StringRequest(Request.Method.POST, Consts.URL.NOTIFY_WFT,
+                                                                StringRequest stringRequest = new StringRequest(Request.Method.POST, Consts.URL.NOTIFY_SS,
                                                                         new Response.Listener<String>() {
                                                                                 @Override
                                                                                 public void onResponse(String response) {
@@ -215,7 +221,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                                                                 Map<String, String> map = new HashMap<>();
                                                                                 map.put("channel", channel);
                                                                                 map.put("wft_orderid", orderId);
-                                                                                map.put("wft_fee", money + "");
+                                                                                map.put("wft_fee", 1 + "");
                                                                                 map.put("trade_type", type + "");
                                                                                 return map;
                                                                         }
@@ -254,6 +260,30 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                         }
                 }
         }
+
+        /**
+         * 圆形进度条测试..
+         */
+        public void circle() {
+                myDialog = new ProgressDialog(PayActivity.this); // 获取对象
+                myDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
+//                myDialog.setTitle("友情提示"); // 设置进度条的标题信息
+                myDialog.setMessage("请稍后..."); // 设置进度条的提示信息
+//                myDialog.setIcon(R.drawable.ic_launcher); // 设置进度条的图标
+                myDialog.setIndeterminate(false); // 设置进度条是否为不明确
+                myDialog.setCancelable(false); // 设置进度条是否按返回键取消
+
+//                // 为进度条添加确定按钮 ， 并添加单机事件
+//                myDialog.setButton("确定", new DialogInterface.OnClickListener() {
+//
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//                                myDialog.cancel(); // 撤销进度条
+//                        }
+//                });
+
+                myDialog.show(); // 显示进度条
+        }
         private class DoPay extends AsyncTask<Void, Void, Map<String, String>> {
                 private Activity activity;
                 private String type;//支付方式
@@ -262,6 +292,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                 public DoPay(Activity activity, String type) {
                         this.activity = activity;
                         this.type = type;
+                        circle();
                 }
 
                 @Override
@@ -279,6 +310,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
 
                 @Override
                 protected void onPostExecute(Map<String, String> result) {
+                        myDialog.dismiss();
                         if (result == null) {
                                 return;
                         }
@@ -306,7 +338,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                         params.put("nonce_str", new Random().nextInt(999999) + ""); // 随机数
                         params.put("out_trade_no", channel + "-" + System.currentTimeMillis()); //订单号
                         params.put("mch_create_ip", "127.0.0.1"); // 机器ip地址
-                        params.put("total_fee", String.valueOf(money * 100)); // 总金额
+                        params.put("total_fee", String.valueOf(1 * 100)); // 总金额
                         params.put("op_shop_id", channel);
                         // 手Q反扫这个设备号必须要传1ff9fe53f66189a6a3f91796beae39fe
                         params.put("device_info", SPUtil.getString(PayActivity.this, Consts.SP.UID));

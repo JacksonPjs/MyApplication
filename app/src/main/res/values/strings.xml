@@ -28,5 +28,8 @@
 本网站相关声明版权及其修改权、更新权和最终解释权均属APP手机APP所有。</string>
 
     <string name="action_cancel">你取消了支付</string>
+    <string name="search_fail">充值vip后，享受永久无限制看片！只有你想不到、没有你看不到！会员支持搜索链接直接播放</string>
+    <string name="vip_tip">检查到您还不是VIP会员，只加载前2页的内容，想看更多隐藏**内容，立即充值vip</string>
+    <string name="loading">加载中...</string>
 
 </resources>

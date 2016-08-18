@@ -65,19 +65,20 @@ public class BannerView extends FrameLayout implements View.OnClickListener, OnP
         addView(viewPager, layoutParams1);
         // 指示器容器
         dotContainer = new LinearLayout(mContext);
+        tvContainer = new LinearLayout(mContext);
         int padding = DisplayUtil.dip2px(getContext(), 8);
+        int padding1 = DisplayUtil.dip2px(getContext(), 4);
         dotContainer.setPadding(padding, padding, padding, padding);
+        tvContainer.setPadding(padding1, padding1, padding1, padding1);
         LayoutParams layoutParams2 = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         layoutParams2.gravity = Gravity.BOTTOM;
-        dotContainer.setGravity(Gravity.RIGHT);
+//        dotContainer.setBackgroundColor(Color.parseColor("#40000000"));
         dotContainer.setBackgroundColor(Color.parseColor("#40000000"));
-        addView(dotContainer, layoutParams2);
-        tvContainer = new LinearLayout(mContext);
-        tvContainer.setPadding(padding, padding, padding, padding);
-        LayoutParams layoutParams3 = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        layoutParams3.gravity = Gravity.BOTTOM;
         tvContainer.setGravity(Gravity.LEFT);
-         dotContainer.addView(tvContainer, layoutParams3);
+        dotContainer.setGravity(Gravity.RIGHT);
+        addView(tvContainer,layoutParams2);
+        addView(dotContainer, layoutParams2);
+
     }
 
     public BannerView(Context context, AttributeSet attrs) {
@@ -103,23 +104,22 @@ public class BannerView extends FrameLayout implements View.OnClickListener, OnP
         // 清除指示器
         dotContainer.removeAllViews();
         tvContainer.removeAllViews();
-
         dots.clear();
+        tv = new TextView(mContext);
+        tv.setTextColor(mContext.getResources().getColor(R.color.white));
+        tvContainer.addView(tv);
         // 装载指示器
         LinearLayout.LayoutParams layoutParams5 = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         layoutParams5.rightMargin = DisplayUtil.dip2px(getContext(), 6);
         for (int i = 0; i < mCount; i++) {
             ImageView dotView = new ImageView(mContext);
             dotView.setImageResource(R.drawable.indicator_normal);
-            dotContainer.addView(dotView, layoutParams5);
+            dotContainer.addView(dotView,layoutParams5);
             dots.add(dotView);
         }
-        tvContainer.removeAllViews();
 
-        tv = new TextView(mContext);
-        tv.setGravity(Gravity.CENTER);
-        tvContainer.addView(tv);
-        dotContainer.addView(tvContainer, layoutParams5);
+
+
         // 清除图片
         images.clear();
 

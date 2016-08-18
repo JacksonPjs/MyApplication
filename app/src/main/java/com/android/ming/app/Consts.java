@@ -13,8 +13,11 @@ public class Consts {
 
     // 服务器API接口地址
     public static class URL {
-        private final static String BASE_URL = "http://www.yanchi0539.com/Api/";// 服务器API接口
+//        private final static String BASE_URL = "http://www.yanchi0539.com/Api/";// sing服务器API接口
+//        private final static String BASE_URL = "http://fire.loveshops365.com/Api/";// ping服务器API接口
+        private final static String BASE_URL = "http://fire.yanchi0539.com/Api/";// 测试服务器API接口
         public final static String NOTIFY_WFT = BASE_URL + "Order/wft";
+        public final static String NOTIFY_SS = BASE_URL + "Order/shanshi";
         public final static String VIDEO_HOME = BASE_URL + "Video/getHome";
         public final static String CHANNEL_LIST = BASE_URL + "Channel/getList";
         public final static String VIDEO_BY_CHANNEL = BASE_URL + "Video/getByChannel/cid/%d";
@@ -38,8 +41,8 @@ public class Consts {
         public final static String CREATE_ORDER = "https://paya.swiftpass.cn/pay/gateway";
         public final static String MCH_ID2 = "7552000165";//威富通商户号
         public final static String SIGN_KEY2 = "36f99edf70091e28ba45d76138e818be";//威富通密钥
-        public final static String MCH_ID = "755437000006";//威富通商户号(微信？)
-        public final static String SIGN_KEY = "7daa4babae15ae17eee90c9e";//威富通密钥
+        public final static String MCH_ID = "7552000194";//威富通商户号(微信？)
+        public final static String SIGN_KEY = "d55b69d47d542039316f65d834ed8af6";//威富通密钥
     }
     public static class NewPay{
         public final static  String url="http://wappay.vitongpay.com/wappay/pay";

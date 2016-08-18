@@ -1,5 +1,6 @@
 package com.android.ming.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,14 +10,18 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.ming.R;
 import com.android.ming.app.Consts;
+import com.android.ming.bean.Channel;
+import com.android.ming.bean.Video;
 import com.android.ming.ui.adapter.FragmentAdapter;
 import com.android.ming.ui.fragment.ChannelFragment;
 import com.android.ming.ui.fragment.HomeFragment;
@@ -24,18 +29,20 @@ import com.android.ming.ui.fragment.LiveFragment;
 import com.android.ming.ui.fragment.PicFragment;
 import com.android.ming.ui.fragment.UserFragment;
 import com.android.ming.ui.view.AnimationToast;
+import com.android.ming.ui.view.IHomeView;
 import com.android.ming.ui.view.ToastCommom;
 import com.android.ming.utils.AppUtil;
 import com.android.ming.utils.SPUtil;
 import com.android.ming.utils.ToastUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener ,IHomeView{
     private ViewPager viewPager;
-    private TextView tabHome, tabChannel,tabPic, tabStar, tabUser;
+    private TextView tabHome, tabChannel,tabPic, tabStar, tabUser,title;
     private Toolbar toolbar;
     private long lastBack;
     private AlertDialog pay2Dialog;
@@ -44,7 +51,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     Handler handler = new Handler();
     int ran=random.nextInt(5000) + 5000;
     int peo=ran;
-
+    ImageView search;
+    List<Video> videos=new ArrayList<>();
+    List<Channel> channels=new ArrayList<>();
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -71,7 +80,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         setContentView(R.layout.activity_main);
 
         toolbar = setToolBarTitle(R.id.toolbar, getTitle());
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
+        title= (TextView) toolbar.findViewById(R.id.title);
+        search= (ImageView) toolbar.findViewById(R.id.search);
         setSupportActionBar(toolbar);
 //        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
         toolbar.setLogo(R.mipmap.ic_launcher);
@@ -109,19 +119,38 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             SPUtil.putBoolean(this, Consts.SP.IS_FIRST, true);
         }
         handler.postDelayed(runnable, 2000);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                iHomeView.showHomeData(null,null);
+                Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("videos", (Serializable) videos);
+                bundle.putSerializable("channels", (Serializable) channels);
+                intent.putExtras(bundle);
+//                intent.put("videos",videos);
+                startActivity(intent);
+            }
+        });
 
     }
+
+
 
     @Override
     public void onClick(View v) {
         if (v == tabHome) {
             viewPager.setCurrentItem(0);
             toolbar.setTitle(getResources().getString(R.string.app_name));
+            title.setText(getResources().getString(R.string.app_name));
             toolbar.setLogo(R.mipmap.ic_launcher);
+            search.setVisibility(View.VISIBLE);
             handler.postDelayed(runnable, 2000);
         } else if (v == tabChannel) {
             viewPager.setCurrentItem(1);
             toolbar.setTitle(R.string.channel);
+            title.setText(getResources().getString(R.string.channel));
+            search.setVisibility(View.GONE);
             toolbar.setLogo(null);
             handler.removeCallbacks(runnable);
 
@@ -129,11 +158,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         else if (v == tabStar) {
             viewPager.setCurrentItem(2);
             toolbar.setTitle(R.string.star);
+            search.setVisibility(View.GONE);
+            title.setText(getResources().getString(R.string.star));
             toolbar.setLogo(null);
             handler.removeCallbacks(runnable);
 
         } else if (v == tabUser) {
+            search.setVisibility(View.GONE);
             viewPager.setCurrentItem(3);
+            title.setText(getResources().getString(R.string.user));
             toolbar.setLogo(null);
             toolbar.setTitle(R.string.user);
             handler.removeCallbacks(runnable);
@@ -205,5 +238,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         super.onRestart();
         if (viewPager.getCurrentItem()==0)
         handler.postDelayed(runnable,2000);
+    }
+
+    @Override
+    public void showHomeData(List<Video> banner, List<Video> videos) {
+        Log.e("activity",videos.size()+"");
+        this.videos=videos;
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    public void showHomeData(List<Channel> channels) {
+        this.channels=channels;
+
     }
 }

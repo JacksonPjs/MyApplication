@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.android.ming.ui.widget.SearchView
+        android:id="@+id/main_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.android.ming.ui.widget.SearchView>
+
+    <GridView
+        android:id="@+id/main_lv_search_results"
+        android:layout_width="match_parent"
+        android:numColumns="5"
+        android:layout_height="wrap_content">
+
+    </GridView>
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/abc_action_bar_home_description"
+    android:visibility="gone"
+    />
+</LinearLayout>

@@ -1,10 +1,12 @@
 package com.android.ming.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by KingYang on 16/3/10.
  * E-Mail: admin@kingyang.cn
  */
-public class Video {
+public class Video implements Serializable{
     private int id;// 视频ID
     private int cid;// 频道ID
     private String url;// 资源地址
@@ -95,5 +97,21 @@ public class Video {
 
     public void setShare(int share) {
         this.share = share;
+    }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "id=" + id +
+                ", cid=" + cid +
+                ", url='" + url + '\'' +
+                ", face='" + face + '\'' +
+                ", title='" + title + '\'' +
+                ", tags='" + tags + '\'' +
+                ", flag=" + flag +
+                ", like=" + like +
+                ", share=" + share +
+                ", comment=" + comment +
+                '}';
     }
 }
