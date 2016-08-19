@@ -49,7 +49,7 @@ public class App extends Application {
         private LruCache<String, Bitmap> mImageCache;
 
         public MyImageCache() {
-            int maxSize = 10 * 1024 * 1024;// 缓存大小:10MB
+            int maxSize = 20 * 1024 * 1024;// 缓存大小:10MB
             mImageCache = new LruCache<String, Bitmap>(maxSize) {
                 @Override
                 protected int sizeOf(String key, Bitmap value) {

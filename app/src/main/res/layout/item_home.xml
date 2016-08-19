@@ -122,11 +122,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/home_title_margingtop"
         android:orientation="vertical"
         android:paddingLeft="@dimen/home_title_padding"
         android:paddingRight="@dimen/home_title_padding"
-        android:paddingTop="@dimen/home_title_padding"
 
         >
 
@@ -144,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/home_text"
-                android:text="亚洲专区"
+                android:text="嫩模专区"
                 android:textColor="@color/textColor"
                 />
 
@@ -361,10 +359,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/home_title_margingtop"
         android:orientation="vertical"
-        android:padding="@dimen/home_title_padding"
-
+        android:paddingLeft="@dimen/home_title_padding"
+        android:paddingRight="@dimen/home_title_padding"
         >
 
         <RelativeLayout
@@ -604,9 +601,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/home_title_margingtop"
         android:orientation="vertical"
-        android:padding="@dimen/home_title_padding"
+        android:paddingLeft="@dimen/home_title_padding"
+        android:paddingRight="@dimen/home_title_padding"
         >
 
         <RelativeLayout
@@ -623,7 +620,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/home_text"
-                android:text="第4专区"
+                android:text="丝袜诱惑"
                 android:textColor="@color/textColor"
                 />
 
@@ -897,9 +894,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/home_title_margingtop"
         android:orientation="vertical"
-        android:padding="@dimen/home_title_padding"
+        android:paddingLeft="@dimen/home_title_padding"
+        android:paddingRight="@dimen/home_title_padding"
         >
 
         <RelativeLayout
@@ -915,7 +912,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/home_text"
-                android:text="专区5"
+                android:text="岛国AV"
                 android:textColor="@color/textColor"
                 />
 
@@ -955,7 +952,7 @@
                     android:id="@+id/fourone"
 
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
+                    android:layout_height="@dimen/im_height"
                     android:layout_margin="@dimen/home_pic_marging"
                     android:layout_weight="1"
                     android:background="@color/white"
@@ -965,7 +962,7 @@
                     <ImageView
                         android:id="@+id/im41"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/im_height2"
+                        android:layout_height="@dimen/im_height"
                         android:scaleType="centerCrop"
 
                         />
@@ -990,7 +987,7 @@
                     android:id="@+id/fourtwo"
 
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
+                    android:layout_height="@dimen/im_height"
                     android:layout_margin="@dimen/home_pic_marging"
                     android:layout_weight="1"
                     android:background="@color/white"
@@ -1001,7 +998,7 @@
                         android:id="@+id/im42"
 
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/im_height2"
+                        android:layout_height="@dimen/im_height"
                         android:scaleType="centerCrop"
 
                         />
@@ -1022,42 +1019,7 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/fourth"
 
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
-                    android:layout_margin="@dimen/home_pic_marging"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-
-                    >
-
-                    <ImageView
-                        android:id="@+id/im43"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/im_height2"
-                        android:scaleType="centerCrop"
-
-                        />
-
-                    <TextView
-                        android:id="@+id/tv43"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:lines="1"
-                        android:gravity="center_vertical"
-                        android:layout_alignParentBottom="true"
-                        android:background="#40000000"
-                        android:ellipsize="end"
-                        android:textSize="12sp"
-
-                        />
-
-                </RelativeLayout>
             </LinearLayout>
 
 
@@ -1071,7 +1033,7 @@
                     android:id="@+id/fourf"
 
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
+                    android:layout_height="@dimen/im_height"
                     android:layout_margin="@dimen/home_pic_marging"
                     android:layout_weight="1"
                     android:background="@color/white"
@@ -1082,7 +1044,7 @@
                         android:id="@+id/im44"
 
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/im_height2"
+                        android:layout_height="@dimen/im_height"
                         android:scaleType="centerCrop"
 
                         />
@@ -1106,7 +1068,7 @@
                     android:id="@+id/fourfive"
 
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
+                    android:layout_height="@dimen/im_height"
                     android:layout_margin="@dimen/home_pic_marging"
                     android:layout_weight="1"
                     android:background="@color/white"
@@ -1117,7 +1079,7 @@
                         android:id="@+id/im45"
 
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/im_height2"
+                        android:layout_height="@dimen/im_height"
                         android:scaleType="centerCrop"
 
                         />
@@ -1137,41 +1099,7 @@
                         />
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/foursix"
 
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
-                    android:layout_margin="@dimen/home_pic_marging"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    >
-
-                    <ImageView
-                        android:id="@+id/im46"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/im_height2"
-                        android:scaleType="centerCrop"
-
-                        />
-
-                    <TextView
-                        android:id="@+id/tv46"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:lines="1"
-                        android:gravity="center_vertical"
-                        android:layout_alignParentBottom="true"
-                        android:background="#40000000"
-                        android:ellipsize="end"
-                        android:textSize="12sp"
-
-                        />
-
-                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -1185,7 +1113,7 @@
                 android:id="@+id/fourseven"
 
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/im_height2"
+                android:layout_height="@dimen/im_height"
                 android:layout_margin="@dimen/home_pic_marging"
                 android:layout_weight="1"
                 android:background="@color/white"
@@ -1196,7 +1124,7 @@
                     android:id="@+id/im47"
 
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
+                    android:layout_height="@dimen/im_height"
                     android:scaleType="centerCrop"
 
                     />
@@ -1221,7 +1149,7 @@
                 android:id="@+id/foure"
 
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/im_height2"
+                android:layout_height="@dimen/im_height"
                 android:layout_margin="@dimen/home_pic_marging"
                 android:layout_weight="1"
                 android:background="@color/white"
@@ -1232,7 +1160,7 @@
                     android:id="@+id/im48"
 
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
+                    android:layout_height="@dimen/im_height"
                     android:scaleType="centerCrop"
 
                     />
@@ -1253,40 +1181,7 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/fourn"
 
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/im_height2"
-                android:layout_margin="@dimen/home_pic_marging"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:orientation="vertical"
-                >
-
-                <ImageView
-                    android:id="@+id/im49"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/im_height2"
-                    android:scaleType="centerCrop"
-
-                    />
-
-                <TextView
-                    android:id="@+id/tv49"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:lines="1"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentBottom="true"
-                    android:background="#40000000"
-                    android:ellipsize="end"
-                    android:textSize="12sp"
-
-                    />
-            </RelativeLayout>
         </LinearLayout>
 
     </LinearLayout>

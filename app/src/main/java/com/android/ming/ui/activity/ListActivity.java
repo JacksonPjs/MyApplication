@@ -86,9 +86,9 @@ public class ListActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 refreshLayout.setRefreshing(false);
                 if (lastVisibleItem>=14){
                     if (SPUtil.getInt(ListActivity.this, Consts.SP.VIP) == 0){
-
+                        dialog();
                     }
-//                    dialog();
+
                 }
                 Log.e("lass==",lastVisibleItem+"");
                     Log.e("cur",currentPage+"");

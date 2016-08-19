@@ -47,11 +47,11 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
         private HomePresenter mPresenter;
         MainActivity activity;
         List<Video> videos;
-        TextView tv_tryone,tv02,tv11,tv12,tv13,tv14,tv15,tv21,tv22,tv23,tv24,tv25,tv31,tv32,tv33,tv34,tv35,tv36,tv41,tv42,tv43,tv44,tv45,tv46,tv47,tv48,tv49;
-        ImageView im01,im02,im11,im12,im13,im14,im15,im21,im22,im23,im24,im25,im31,im32,im33,im34,im35,im36,im41,im42,im43,im44,im45,im46,im47,im48,im49;
+        TextView tv_tryone,tv02,tv11,tv12,tv13,tv14,tv15,tv21,tv22,tv23,tv24,tv25,tv31,tv32,tv33,tv34,tv35,tv36,tv41,tv42,tv44,tv45,tv47,tv48;
+        ImageView im01,im02,im11,im12,im13,im14,im15,im21,im22,im23,im24,im25,im31,im32,im33,im34,im35,im36,im41,im42,im44,im45,im47,im48;
         RelativeLayout firstTab,secondTab,thTab,fourTab;
         RelativeLayout tryOne,tryTwo,firstOne,firstTwo,firstThree,fistFour,fistFive,secondOne,secondTwo,secondThree,secondFour,secondFive;
-        RelativeLayout thOne,thTwo,thThree,thFour,thFive,thSix,fourOne,fourTwo,fourThree,fourFour,fourFive,fourSix,fourSeven,fourEight,fourNine;
+        RelativeLayout thOne,thTwo,thThree,thFour,thFive,thSix,fourOne,fourTwo,fourFour,fourFive,fourSeven,fourEight;
 
         @Nullable
         @Override
@@ -95,13 +95,13 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
                 tv36= (TextView) view.findViewById(R.id.tv36);
                 tv41= (TextView) view.findViewById(R.id.tv41);
                 tv42= (TextView) view.findViewById(R.id.tv42);
-                tv43= (TextView) view.findViewById(R.id.tv43);
+//                tv43= (TextView) view.findViewById(R.id.tv43);
                 tv44= (TextView) view.findViewById(R.id.tv44);
                 tv45= (TextView) view.findViewById(R.id.tv45);
-                tv46= (TextView) view.findViewById(R.id.tv46);
+//                tv46= (TextView) view.findViewById(R.id.tv46);
                 tv47= (TextView) view.findViewById(R.id.tv47);
                 tv48= (TextView) view.findViewById(R.id.tv48);
-                tv49= (TextView) view.findViewById(R.id.tv49);
+//                tv49= (TextView) view.findViewById(R.id.tv49);
 
                 im01= (ImageView) view.findViewById(R.id.im01);
                 im02= (ImageView) view.findViewById(R.id.im02);
@@ -123,13 +123,13 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
                 im36= (ImageView) view.findViewById(R.id.im36);
                 im41= (ImageView) view.findViewById(R.id.im41);
                 im42= (ImageView) view.findViewById(R.id.im42);
-                im43= (ImageView) view.findViewById(R.id.im43);
+//                im43= (ImageView) view.findViewById(R.id.im43);
                 im44= (ImageView) view.findViewById(R.id.im44);
                 im45= (ImageView) view.findViewById(R.id.im45);
-                im46= (ImageView) view.findViewById(R.id.im46);
+//                im46= (ImageView) view.findViewById(R.id.im46);
                 im47= (ImageView) view.findViewById(R.id.im47);
                 im48= (ImageView) view.findViewById(R.id.im48);
-                im49= (ImageView) view.findViewById(R.id.im49);
+//                im49= (ImageView) view.findViewById(R.id.im49);
 
                 firstTab= (RelativeLayout) view.findViewById(R.id.fisttab);
                 secondTab= (RelativeLayout) view.findViewById(R.id.secontab);
@@ -159,13 +159,13 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
 
                 fourOne= (RelativeLayout) view.findViewById(R.id.fourone);
                 fourTwo= (RelativeLayout) view.findViewById(R.id.fourtwo);
-                fourThree= (RelativeLayout) view.findViewById(R.id.fourth);
+//                fourThree= (RelativeLayout) view.findViewById(R.id.fourth);
                 fourFour= (RelativeLayout) view.findViewById(R.id.fourf);
                 fourFive= (RelativeLayout) view.findViewById(R.id.fourfive);
-                fourSix= (RelativeLayout) view.findViewById(R.id.foursix);
+//                fourSix= (RelativeLayout) view.findViewById(R.id.foursix);
                 fourSeven= (RelativeLayout) view.findViewById(R.id.fourseven);
                 fourEight= (RelativeLayout) view.findViewById(R.id.foure);
-                fourNine= (RelativeLayout) view.findViewById(R.id.fourn);
+//                fourNine= (RelativeLayout) view.findViewById(R.id.fourn);
 
                 firstTab.setOnClickListener(this);
                 secondTab.setOnClickListener(this);
@@ -192,13 +192,13 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
                 thSix.setOnClickListener(this);
                 fourOne.setOnClickListener(this);
                 fourTwo.setOnClickListener(this);
-                fourThree.setOnClickListener(this);
+//                fourThree.setOnClickListener(this);
                 fourFour.setOnClickListener(this);
                 fourFive.setOnClickListener(this);
                 fourSeven.setOnClickListener(this);
-                fourSix.setOnClickListener(this);
+//                fourSix.setOnClickListener(this);
                 fourEight.setOnClickListener(this);
-                fourNine.setOnClickListener(this);
+//                fourNine.setOnClickListener(this);
 
 
                 mPresenter = new HomePresenter(this, activity.getQueue());
@@ -288,22 +288,22 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
 
                 tv41.setText(videos.get(18).getTitle());
                 tv42.setText(videos.get(19).getTitle());
-                tv43.setText(videos.get(20).getTitle());
-                tv44.setText(videos.get(21).getTitle());
-                tv45.setText(videos.get(22).getTitle());
-                tv46.setText(videos.get(23).getTitle());
-                tv47.setText(videos.get(24).getTitle());
-                tv48.setText(videos.get(25).getTitle());
-                tv49.setText(videos.get(26).getTitle());
+//                tv43.setText(videos.get(20).getTitle());
+                tv44.setText(videos.get(20).getTitle());
+                tv45.setText(videos.get(21).getTitle());
+//                tv46.setText(videos.get(23).getTitle());
+                tv47.setText(videos.get(22).getTitle());
+                tv48.setText(videos.get(23).getTitle());
+//                tv49.setText(videos.get(26).getTitle());
                 displayImage(im41,videos.get(18).getFace());
                 displayImage(im42,videos.get(19).getFace());
-                displayImage(im43,videos.get(20).getFace());
-                displayImage(im44,videos.get(21).getFace());
-                displayImage(im45,videos.get(22).getFace());
-                displayImage(im46,videos.get(23).getFace());
-                displayImage(im47,videos.get(24).getFace());
-                displayImage(im48,videos.get(25).getFace());
-                displayImage(im49,videos.get(26).getFace());
+//                displayImage(im43,videos.get(20).getFace());
+                displayImage(im44,videos.get(20).getFace());
+                displayImage(im45,videos.get(21).getFace());
+//                displayImage(im46,videos.get(23).getFace());
+                displayImage(im47,videos.get(22).getFace());
+                displayImage(im48,videos.get(23).getFace());
+//                displayImage(im49,videos.get(26).getFace());
 
         }
 
@@ -340,7 +340,7 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
         public void onClick(View v) {
                 switch (v.getId()){
                         case R.id.fisttab:
-                                startActivity(ListActivity.createIntent(activity, 2,"亚洲专区"));
+                                startActivity(ListActivity.createIntent(activity, 2,"嫩模专区"));
 
                                 break;
                         case R.id.secontab:
@@ -348,11 +348,11 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
 
                                 break;
                         case R.id.thtab:
-                                startActivity(ListActivity.createIntent(activity, 4,"性感美女"));
+                                startActivity(ListActivity.createIntent(activity, 5,"美女丝袜"));
 
                                 break;
                         case R.id.fourtab:
-                                startActivity(ListActivity.createIntent(activity, 7,"邪恶动漫"));
+                                startActivity(ListActivity.createIntent(activity, 1,"岛国AV"));
 
                                 break;
 
@@ -416,27 +416,27 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
                         case R.id.fourtwo:
                                 startActivity(VideoActivity.createIntent(getActivity(), videos.get(19).getId()));
                                 break;
-                        case R.id.fourth:
+//                        case R.id.fourth:
+//                                startActivity(VideoActivity.createIntent(getActivity(), videos.get(20).getId()));
+//                                break;
+                        case R.id.fourf:
                                 startActivity(VideoActivity.createIntent(getActivity(), videos.get(20).getId()));
                                 break;
-                        case R.id.fourf:
+                        case R.id.fourfive:
                                 startActivity(VideoActivity.createIntent(getActivity(), videos.get(21).getId()));
                                 break;
-                        case R.id.fourfive:
+//                        case R.id.foursix:
+//                                startActivity(VideoActivity.createIntent(getActivity(), videos.get(23).getId()));
+//                                break;
+                        case R.id.fourseven:
                                 startActivity(VideoActivity.createIntent(getActivity(), videos.get(22).getId()));
                                 break;
-                        case R.id.foursix:
+                        case R.id.foure:
                                 startActivity(VideoActivity.createIntent(getActivity(), videos.get(23).getId()));
                                 break;
-                        case R.id.fourseven:
-                                startActivity(VideoActivity.createIntent(getActivity(), videos.get(24).getId()));
-                                break;
-                        case R.id.foure:
-                                startActivity(VideoActivity.createIntent(getActivity(), videos.get(25).getId()));
-                                break;
-                        case R.id.fourn:
-                                startActivity(VideoActivity.createIntent(getActivity(), videos.get(26).getId()));
-                                break;
+//                        case R.id.fourn:
+//                                startActivity(VideoActivity.createIntent(getActivity(), videos.get(26).getId()));
+//                                break;
                 }
         }
 
