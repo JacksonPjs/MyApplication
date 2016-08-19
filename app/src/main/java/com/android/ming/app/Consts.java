@@ -44,13 +44,13 @@ public class Consts {
         public final static String MCH_ID = "7552000194";//威富通商户号(微信？)
         public final static String SIGN_KEY = "d55b69d47d542039316f65d834ed8af6";//威富通密钥
     }
-    public static class NewPay{
-        public final static  String url="http://wappay.vitongpay.com/wappay/pay";
-        public final static  String CustomerNo="800002100110";//商户代号
-        public final static  String GoodNo="GN10T";//商户商品代号
-        public final static  String ProductNo="PN10T";//支付中心产品代号
-        public final static  String OrderNo ="?";//商户订单号
-
-
-    }
+//    public static class NewPay{
+//        public final static  String url="http://wappay.vitongpay.com/wappay/pay";
+//        public final static  String CustomerNo="800002100110";//商户代号
+//        public final static  String GoodNo="GN10T";//商户商品代号
+//        public final static  String ProductNo="PN10T";//支付中心产品代号
+//        public final static  String OrderNo ="?";//商户订单号
+//
+//
+//    }
 }
