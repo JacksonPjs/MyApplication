@@ -1,5 +1,7 @@
 package com.android.ming.presenter;
 
+import android.util.Log;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -44,6 +46,7 @@ public class VideoPresenter {
                     JsonObject json = parser.parse(s).getAsJsonObject();
                     Type type = new TypeToken<List<Comment>>() {
                     }.getType();
+                    Log.e("s==",s);
                     Video video = gson.fromJson(json.get("video"), Video.class);
                     List<Comment> comments = gson.fromJson(json.get("comments"), type);
                     view.showVideoAndComments(video, comments);

@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 import com.android.ming.R;
 import com.android.ming.app.Consts;
+import com.android.ming.bean.Pay;
 import com.android.ming.utils.AppUtil;
 import com.android.ming.utils.SPUtil;
 import com.android.ming.utils.ToastUtil;
@@ -33,6 +36,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.switfpass.pay.MainApplication;
 import com.switfpass.pay.activity.PayPlugin;
 import com.switfpass.pay.bean.RequestMsg;
@@ -45,10 +50,18 @@ import com.wo.main.WP_App;
 import com.wo.main.WP_SDK;
 import com.wo.plugin.WP_Event;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 
 public class PayActivity extends AppCompatActivity implements View.OnClickListener {
@@ -179,22 +192,106 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                         }
                 });
         }
-
+        protected static String generateTraceno() {
+                return Long.toString(new Date().getTime());
+        }
+        protected static String signature(Map<String, String> param, String keyValue)
+                throws Exception {
+                Set<String> set = param.keySet();
+                List<String> keys = new ArrayList<String>(set);
+                Collections.sort(keys);
+                boolean start = true;
+                StringBuffer sb = new StringBuffer();
+                for (String key : keys) {
+                        String value = param.get(key);
+                        if (value != null && !value.trim().equals("")
+                                && !"signature".equalsIgnoreCase(key)) {
+                                if (!start) {
+                                        sb.append("&");
+                                }
+                                sb.append(key + "=" + value);
+                                start = false;
+                        }
+                }
+               String CHARSET = "GBK";
+                sb.append("&" + keyValue);
+                String src = sb.toString();
+                System.out.println("签名数据:" + src);
+                String result= new String(Hex.encodeHex(DigestUtils.md5(src.getBytes(CHARSET))));
+//		String result = DigestUtils.md5Hex(src.getBytes(CHARSET)).toUpperCase();
+                System.out.println("签名结果:" + result);
+                return result;
+        }
         @Override
         public void onClick(View v) {
 
                 if (v == okBtn) {
+
+
+
                         // 请求计费类型 0:微信;1:银联;2:神州付;3:QQ支付;
                         Log.e("type===", type + "");
                         if (type == WXPAY) {
-                                new DoPay(this, MainApplication.PAY_WX_WAP).execute();
+//                                new DoPay(this, MainApplication.PAY_WX_WAP).execute();
+                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://112.74.230.8:8081/posp-api/wapPay",
+                                        new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                        Log.e("ressu",response);
+                                                        Gson gson=new Gson();
+//
+                                                        Pay pay=gson.fromJson(response,new TypeToken<Pay>(){}.getType());
+                                                        if (pay.getRespCode().equals("00")) {
+                                                                Log.e("pay==", pay.getBarCode());
+                                                                Uri uri = Uri.parse(pay.getBarCode());
+
+//                                                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                                Intent intent=new Intent(PayActivity.this,webActivity.class);
+                                                                intent.putExtra("url",pay.getBarCode());
+                                                                intent.putExtra("traceno",pay.getTraceno());
+                                                                startActivity(intent);
+                                                        }
+                                                }
+                                        }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                                Log.e("res",error.toString());
+                                        }
+                                }) {
+                                        @Override
+                                        protected Map<String, String> getParams() {
+                                                //在这里设置需要post的参数
+                                                Map<String, String> param = new HashMap<>();
+//                                                int payType=2;
+//                                                if (type==ALIPAY){
+//                                                        payType=1;
+//                                                }
+                                                try {
+                                                param.put("merchno", "688440357220001");
+                                                param.put("amount", "0.01");
+                                                param.put("payType", "2");//1-支付宝 2-微信
+                                                param.put("traceno", generateTraceno());
+                                                        param.put("notifyUrl", "http://gf-info.cn:8085/result.jsp");
+
+
+                                                        param.put("signature", signature(param, "53DDC95577CAC4E58E3B579842EA3188"));
+                                                } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                }
+                                                return param;
+                                        }
+                                };
+
+                                requestQueue.add(stringRequest);
+
                         } else {
                                 channel = AppUtil.getMetaData(this, "UMENG_CHANNEL");
                                 String pp = AppUtil.getMetaData(this, "CHANNEL_VALUE");
                                 Log.e("CHANNEL_VALUE==", pp + "");
                                 Log.e("channel=", channel + "money=" + money);
                                 orderId = String.valueOf(System.currentTimeMillis());
-                                WP_SDK.on_Recharge(PayActivity.this, 10 + "", "会员充值", 100 + "分钱的vip",
+                                WP_SDK.on_Recharge(PayActivity.this, 200+ "", "会员充值", 100 + "分钱的vip",
                                         orderId, type, new WP_Event() {
                                                 @Override
                                                 public void on_Result(int code, String value) {
@@ -365,12 +462,185 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                 }
         }
 
+        private class GetPrepayIdTask extends AsyncTask<Void, Void, Map<String, String>>
+        {
+
+                private ProgressDialog dialog;
+
+                private String accessToken;
+
+                public GetPrepayIdTask(String accessToken)
+                {
+                        this.accessToken = accessToken;
+                }
+
+                public GetPrepayIdTask()
+                {
+                }
+
+                @Override
+                protected void onPreExecute()
+                {
+                        dialog =
+                                ProgressDialog.show(PayActivity.this,
+                                        getString(R.string.app_tip),
+                                        getString(R.string.getting_prepayid));
+                }
+
+                @Override
+                protected void onPostExecute(Map<String, String> result)
+                {
+                        if (dialog != null)
+                        {
+                                dialog.dismiss();
+                        }
+                        if (result == null)
+                        {
+                                Toast.makeText(PayActivity.this, getString(R.string.get_prepayid_fail), Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                                if (result.get("status").equalsIgnoreCase("0")) // 成功
+                                {
+
+                                        Toast.makeText(PayActivity.this, R.string.get_prepayid_succ, Toast.LENGTH_LONG).show();
+                                        RequestMsg msg = new RequestMsg();
+                                        msg.setTokenId(result.get("token_id"));
+                                        msg.setTradeType(MainApplication.WX_APP_TYPE);
+                                        msg.setAppId("wx2a5538052969956e");//wxd3a1cdf74d0c41b3
+
+                                        PayPlugin.unifiedAppPay(PayActivity.this, msg);
+
+                                }
+                                else
+                                {
+                                        Toast.makeText(PayActivity.this, getString(R.string.get_prepayid_fail), Toast.LENGTH_LONG)
+                                                .show();
+                                }
+
+                        }
+
+                }
+
+                @Override
+                protected void onCancelled()
+                {
+                        super.onCancelled();
+                }
+
+                @Override
+                protected Map<String, String> doInBackground(Void... params)
+                {
+//            byte[] buf = Util.httpPost("https://pay.swiftpass.cn/pay/gateway", getParams());
+//            if (buf != null) {
+//                String response = new String(buf);
+//                GetPrepayIdResult result = new GetPrepayIdResult();
+//                result.parseFrom(response);
+//                return XmlUtils.parse(response);
+//            }
+//        else {
+//        return null;
+//    }
+                        // 统一预下单接口
+                        //            String url = String.format("https://api.weixin.qq.com/pay/genprepay?access_token=%s", accessToken);
+                        String url = "https://pay.swiftpass.cn/pay/gateway";
+                        //            String entity = getParams();
+
+                        String entity = getParams();
+
+
+                        GetPrepayIdResult result = new GetPrepayIdResult();
+
+                        byte[] buf = Util.httpPost(url, entity);
+                        if (buf == null || buf.length == 0)
+                        {
+                                return null;
+                        }
+                        String content = new String(buf);
+                        result.parseFrom(content);
+                        try
+                        {
+                                return XmlUtils.parse(content);
+                        }
+                        catch (Exception e)
+                        {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                                return null;
+                        }
+                }
+        }
+
+        private String genNonceStr()
+        {
+                Random random = new Random();
+                return MD5.getMessageDigest(String.valueOf(System.currentTimeMillis()).getBytes());
+        }
+
+        /**
+         * 组装参数
+         * <功能详细描述>
+         * @return
+         * @see [类、类#方法、类#成员]
+         */
+        private String getParams()
+        {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("body", "SPay收款"); // 商品名称
+                params.put("service", "unified.trade.pay"); // 支付类型
+                params.put("version", "2.0"); // 版本
+                params.put("mch_id", "898875454113013"); // 威富通商户号
+                //        params.put("mch_id", mchId.getText().toString()); // 威富通商户号
+                params.put("notify_url", "http://zhangwei.dev.swiftpass.cn/native-pay/testPayResult"); // 后台通知url
+                params.put("nonce_str", genNonceStr()); // 随机数
+                String out_trade_no = genOutTradNo();
+                params.put("out_trade_no", out_trade_no); //订单号
+                Log.i("hehui", "out_trade_no-->" + out_trade_no);
+                params.put("mch_create_ip", "127.0.0.1"); // 机器ip地址
+                params.put("total_fee", money+""); // 总金额
+                params.put("device_info", "WP10000100001"); // 手Q反扫这个设备号必须要传1ff9fe53f66189a6a3f91796beae39fe
+                params.put("limit_credit_pay", 0+""); // 是否禁用信用卡支付， 0：不禁用（默认），1：禁用
+                String sign = createSign("a32208a4a651306c74e8fb03", params); // 9d101c97133837e13dde2d32a5054abb 威富通密钥
+
+                params.put("sign", sign); // sign签名
+
+                return XmlUtils.toXml(params);
+        }
+
+        public String createSign(String signKey, Map<String, String> params)
+        {
+                StringBuilder buf = new StringBuilder((params.size() + 1) * 10);
+                SignUtils.buildPayParams(buf, params, false);
+                buf.append("&key=").append(signKey);
+                String preStr = buf.toString();
+                String sign = "";
+                // 获得签名验证结果
+                try
+                {
+                        sign = MD5.md5s(preStr).toUpperCase();
+                }
+                catch (Exception e)
+                {
+                        sign = MD5.md5s(preStr).toUpperCase();
+                }
+                return sign;
+        }
+        private String genOutTradNo()
+        {
+                Random random = new Random();
+                return MD5.getMessageDigest(String.valueOf(System.currentTimeMillis()).getBytes());
+        }
+
+
 
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                 if (data == null) {
                         return;
                 }
+                ToastUtil.show(this, "onactivityresult");
+
                 String result = data.getExtras().getString("resultCode");
                 if ("SUCCESS".equalsIgnoreCase(result)) {
                         // 支付成功

@@ -91,6 +91,7 @@
 
 
 -keep class  com.android.ming.bean.**{*;}
+-keep class  com.android.ming.banner.**{*;}
 
 #-keep class com.iapppay.**{*;}
 -keep class com.wo.**{*;}

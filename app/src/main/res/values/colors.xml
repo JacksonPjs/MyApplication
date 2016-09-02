@@ -11,6 +11,7 @@
     <color name="tran">#40000000</color>
     <color name="pay_bg">#3d0a13</color>
     <color name="textColor">#808080</color>
+    <color name="vip_textcolor">#FF1D11</color>
 
 
     <color name="white_gray">#EEEEEE</color>

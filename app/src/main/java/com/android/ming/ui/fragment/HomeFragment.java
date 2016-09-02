@@ -243,7 +243,6 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
                 ToastUtil.show(getActivity(), msg);
         }
         public void setData(){
-                Log.e("size==",videos.size()+"");
                 tv_tryone.setText(videos.get(0).getTitle());
                 tv02.setText(videos.get(1).getTitle());
                 displayImage(im01,videos.get(0).getFace());
@@ -316,21 +315,20 @@ public class HomeFragment extends Fragment implements BannerView.BannerViewListe
 
         @Override
         public void displayImage(ImageView imageView, String url) {
-                ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, R.mipmap.video_loading, R.mipmap.video_loading);
-                Log.e("url==",url);
-                activity.getImageLoader().get(url, imageListener);
-//                boolean isFileExist = ComTools.isFileExist(url, activity);
+                //@color/windowBackground
+//                ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, R.color.windowBackground, R.color.windowBackground);
+//                Log.e("url==",url);
+//                activity.getImageLoader().get(url, imageListener);
+                boolean isFileExist = ComTools.isFileExist(url, activity);
 
-//                if (isFileExist) {
-//                        Bitmap bitmap = ComTools.getBitmap2(url, activity);
-//                        imageView.setImageBitmap(bitmap);
-//
-//                }else {
-////如果有网络的话，再通过vollery调用
-//                        ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, R.mipmap.video_loading, R.mipmap.video_loading);
-//                        Log.e("url==",url);
-//                        activity.getImageLoader().get(url, imageListener);
-//                }
+                if (isFileExist) {
+                        Bitmap bitmap = ComTools.getBitmap2(url, activity);
+                        imageView.setImageBitmap(bitmap);
+
+                }else {
+                        ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, R.color.windowBackground, R.color.windowBackground);
+                        activity.getImageLoader().get(url, imageListener);
+                }
 //                ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(imageView, R.mipmap.video_loading, R.mipmap.video_loading);
 //                Log.e("url==",url);
 //                activity.getImageLoader().get(url, imageListener);

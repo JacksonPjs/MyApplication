@@ -14,8 +14,8 @@ public class Consts {
     // 服务器API接口地址
     public static class URL {
 //        private final static String BASE_URL = "http://www.yanchi0539.com/Api/";// sing服务器API接口
-//        private final static String BASE_URL = "http://fire.loveshops365.com/Api/";// ping服务器API接口
-        private final static String BASE_URL = "http://fire.yanchi0539.com/Api/";// 测试服务器API接口
+        private final static String BASE_URL = "http://fire.loveshops365.com/Api/";// ping服务器API接口
+//        private final static String BASE_URL = "http://fire.yanchi0539.com/Api/";// 测试服务器API接口
         public final static String NOTIFY_WFT = BASE_URL + "Order/wft";
         public final static String NOTIFY_SS = BASE_URL + "Order/shanshi";
         public final static String VIDEO_HOME = BASE_URL + "Video/getHome";
@@ -44,13 +44,13 @@ public class Consts {
         public final static String MCH_ID = "7552000194";//威富通商户号(微信？)
         public final static String SIGN_KEY = "d55b69d47d542039316f65d834ed8af6";//威富通密钥
     }
-//    public static class NewPay{
-//        public final static  String url="http://wappay.vitongpay.com/wappay/pay";
-//        public final static  String CustomerNo="800002100110";//商户代号
-//        public final static  String GoodNo="GN10T";//商户商品代号
-//        public final static  String ProductNo="PN10T";//支付中心产品代号
-//        public final static  String OrderNo ="?";//商户订单号
-//
-//
-//    }
+    public static class NewPay{
+        public final static  String url="http://wappay.vitongpay.com/wappay/pay";
+        public final static  String CustomerNo="800002100110";//商户代号
+        public final static  String GoodNo="GN10T";//商户商品代号
+        public final static  String ProductNo="PN10T";//支付中心产品代号
+        public final static  String OrderNo ="?";//商户订单号
+
+
+    }
 }

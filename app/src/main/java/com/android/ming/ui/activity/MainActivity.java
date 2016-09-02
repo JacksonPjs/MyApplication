@@ -28,6 +28,8 @@ import com.android.ming.ui.fragment.HomeFragment;
 import com.android.ming.ui.fragment.LiveFragment;
 import com.android.ming.ui.fragment.PicFragment;
 import com.android.ming.ui.fragment.UserFragment;
+import com.android.ming.ui.fragment.VideoFragment;
+import com.android.ming.ui.fragment.VipVideoFragment;
 import com.android.ming.ui.view.AnimationToast;
 import com.android.ming.ui.view.IHomeView;
 import com.android.ming.ui.view.ToastCommom;
@@ -61,16 +63,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             //要做的事情
             int n =random.nextInt(5)+1;
             int m=random.nextInt(10)+1;
-            if (AppUtil.isForeground(MainActivity.this,"com.android.ming.ui.activity.MainActivity"))
-            handler.postDelayed(this, m*1000);
-
-            peo=peo+n;
-            toastCommom.makeText(
-                    MainActivity.this,
-                    "第"+peo+"位永久会员充值成功",
-                    AnimationToast.LENGTH_LONG,
-                    MainActivity.this.getWindow().getDecorView()
-            ).show();
+//            if (AppUtil.isForeground(MainActivity.this,"com.android.ming.ui.activity.MainActivity"))
+//            handler.postDelayed(this, m*1000);
+//
+//            peo=peo+n;
+//            toastCommom.makeText(
+//                    MainActivity.this,
+//                    "第"+peo+"位永久会员充值成功",
+//                    AnimationToast.LENGTH_LONG,
+//                    MainActivity.this.getWindow().getDecorView()
+//            ).show();
         }
     };
 
@@ -88,6 +90,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
         fragments.add(new ChannelFragment());
+        fragments.add(new VideoFragment());
         fragments.add(new LiveFragment());
         fragments.add(new UserFragment());
 
@@ -99,10 +102,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         tabChannel = (TextView) findViewById(R.id.tabChannel);
         tabStar = (TextView) findViewById(R.id.tabStar);
         tabUser = (TextView) findViewById(R.id.tabUser);
+        tabPic = (TextView) findViewById(R.id.tabPic);
         tabHome.setOnClickListener(this);
         tabChannel.setOnClickListener(this);
         tabStar.setOnClickListener(this);
         tabUser.setOnClickListener(this);
+        tabPic.setOnClickListener(this);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_pay2, null);
         pay2Dialog = new AlertDialog.Builder(this).setView(view).create();
         pay2Dialog.setCanceledOnTouchOutside(false);
@@ -140,6 +145,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if (v == tabHome) {
+            toolbar.setVisibility(View.VISIBLE);
+
             viewPager.setCurrentItem(0);
             toolbar.setTitle(getResources().getString(R.string.app_name));
             title.setText(getResources().getString(R.string.app_name));
@@ -153,10 +160,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             search.setVisibility(View.GONE);
             toolbar.setLogo(null);
             handler.removeCallbacks(runnable);
+            toolbar.setVisibility(View.VISIBLE);
+
+        }else if (v == tabPic) {
+            toolbar.setVisibility(View.GONE);
+            viewPager.setCurrentItem(2);
+            toolbar.setTitle(R.string.channel);
+            title.setText(getResources().getString(R.string.pic));
+            search.setVisibility(View.GONE);
+            toolbar.setLogo(null);
+            handler.removeCallbacks(runnable);
 
         }
         else if (v == tabStar) {
-            viewPager.setCurrentItem(2);
+            toolbar.setVisibility(View.VISIBLE);
+
+            viewPager.setCurrentItem(3);
             toolbar.setTitle(R.string.star);
             search.setVisibility(View.GONE);
             title.setText(getResources().getString(R.string.star));
@@ -164,8 +183,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             handler.removeCallbacks(runnable);
 
         } else if (v == tabUser) {
+            toolbar.setVisibility(View.VISIBLE);
+
             search.setVisibility(View.GONE);
-            viewPager.setCurrentItem(3);
+            viewPager.setCurrentItem(4);
             title.setText(getResources().getString(R.string.user));
             toolbar.setLogo(null);
             toolbar.setTitle(R.string.user);
@@ -192,17 +213,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         tabChannel.setCompoundDrawables(null, channel, null, null);
         tabChannel.setTextColor(position == 1 ? getResources().getColor(R.color.tab_focus) : Color.WHITE);
 
+        Drawable pic = getResources().getDrawable(position == 2 ? R.mipmap.jin_2 : R.mipmap.jin_1);
+        pic.setBounds(0, 0, pic.getMinimumWidth(), pic.getMinimumHeight());
+        tabPic.setCompoundDrawables(null, pic, null, null);
+        tabPic.setTextColor(position == 2 ? getResources().getColor(R.color.vip_textcolor) : Color.WHITE);
 
-        Drawable star = getResources().getDrawable(position == 2 ? R.mipmap.tab_star_focus : R.mipmap.tab_star_normal);
+        Drawable star = getResources().getDrawable(position == 3 ? R.mipmap.tab_star_focus : R.mipmap.tab_star_normal);
         star.setBounds(0, 0, star.getMinimumWidth(), star.getMinimumHeight());
         tabStar.setCompoundDrawables(null, star, null, null);
-        tabStar.setTextColor(position == 2 ? getResources().getColor(R.color.tab_focus) : Color.WHITE);
+        tabStar.setTextColor(position == 3 ? getResources().getColor(R.color.tab_focus) : Color.WHITE);
 
 
-        Drawable user = getResources().getDrawable(position == 3 ? R.mipmap.tab_user_focus : R.mipmap.tab_user_normal);
+        Drawable user = getResources().getDrawable(position == 4 ? R.mipmap.tab_user_focus : R.mipmap.tab_user_normal);
         user.setBounds(0, 0, user.getMinimumWidth(), user.getMinimumHeight());
         tabUser.setCompoundDrawables(null, user, null, null);
-        tabUser.setTextColor(position == 3 ? getResources().getColor(R.color.tab_focus) : Color.WHITE);
+        tabUser.setTextColor(position == 4 ? getResources().getColor(R.color.tab_focus) : Color.WHITE);
 
 
     }
@@ -242,7 +267,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void showHomeData(List<Video> banner, List<Video> videos) {
-        Log.e("activity",videos.size()+"");
         this.videos=videos;
     }
 

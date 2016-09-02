@@ -26,7 +26,7 @@
 
     <application
         android:name="com.android.ming.app.App"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="快播影音"
         android:supportsRtl="true"
@@ -42,7 +42,7 @@
         <!-- wosdk固定标识,当前SDK版本标识固定,请勿修改或遗漏,否则会造成无法计费 -->
         <meta-data
             android:name="VIASDKVERSION"
-            android:value="A100016"/>
+            android:value="A100017"/>
         <!-- 应用ID -->
         <meta-data
             android:name="APPID"
@@ -195,6 +195,7 @@
         <activity
             android:name="com.switfpass.pay.activity.QQWapPayWebView"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.webActivity"></activity>
 
 
     </application>

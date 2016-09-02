@@ -6,7 +6,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/black"
         android:titleTextColor="@android:color/white"
         android:id="@+id/toolbar"
         >
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/black"
         android:orientation="horizontal">
 
         <TextView
@@ -55,13 +55,23 @@
             android:textColor="@color/tab_focus" />
 
         <TextView
-            android:id="@+id/tabChannel"
+        android:id="@+id/tabChannel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@mipmap/tab_channel_normal"
+        android:gravity="center_horizontal"
+        android:text="@string/channel"
+        android:textColor="@android:color/white" />
+        <TextView
+            android:id="@+id/tabPic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableTop="@mipmap/tab_channel_normal"
+            android:drawableTop="@mipmap/jin_1"
             android:gravity="center_horizontal"
-            android:text="@string/channel"
+            android:drawablePadding="4dp"
+            android:text="@string/pic"
             android:textColor="@android:color/white" />
 
         <TextView

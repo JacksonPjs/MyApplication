@@ -32,4 +32,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         // 不销毁,防止Fragment被重复初始化
     }
+
+
 }

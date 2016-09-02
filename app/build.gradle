@@ -3,7 +3,7 @@ Properties properties=new Properties();
 properties.load(project.rootProject.file("local.properties").newDataInputStream())
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '23.0.3'
     signingConfigs {
         video {
             keyAlias '1'
@@ -27,10 +27,10 @@ android {
     }
     defaultConfig {
         applicationId properties.getProperty("debug")
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 22
-        versionCode 8
-        versionName "4.6"
+        versionCode 9
+        versionName "4.7"
         signingConfig signingConfigs.video
     }
     buildTypes {
@@ -154,7 +154,7 @@ android {
             manifestPlaceholders.put("CHANNEL_VALUE","4982_279_14939_899")
         }
         sing002 {
-//            applicationId properties.getProperty("sing002")
+            applicationId properties.getProperty("sing002")
             manifestPlaceholders = [APP_CHANNEL_VALUE: name]
             manifestPlaceholders.put("CHANNEL_VALUE","4981_279_14940_899")
         }
@@ -177,12 +177,17 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile files('libs/volly-1.0.11.jar')
     compile files('libs/gson-2.6.2.jar')
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile files('libs/umeng-analytics-v5.6.7.jar')
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.flyco.banner:FlycoBanner_Lib:1.1.8@aar'
+    compile project(':flycopageindicator_lib')
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile files('libs/commons-codec-1.6.jar')
     compile files('libs/alipaySdk-20160516.jar')
+    compile files('libs/httpcore-4.4.jar')
     compile files('libs/via_pay_sdk_v1.jar')
+    compile files('libs/volly-1.0.11.jar')
     compile files('libs/wftsdk2.0.jar')
 }
