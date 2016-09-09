@@ -79,6 +79,7 @@
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
+
             </intent-filter>
         </activity>
         <activity
@@ -195,7 +196,12 @@
         <activity
             android:name="com.switfpass.pay.activity.QQWapPayWebView"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.webActivity"></activity>
+        <activity android:name=".ui.activity.webActivity"
+            android:theme="@style/translucent_dialog"
+
+            >
+
+        </activity>
 
 
     </application>

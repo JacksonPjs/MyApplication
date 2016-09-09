@@ -21,8 +21,10 @@
     </style>
     <style name="AppTheme.pay" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="windowNoTitle">true</item>
-
-
+    </style>
+    <style name="translucent_dialog" parent="AppTheme.pay">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
     <style name="AnimationToast" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/animation_toast_enter</item>

@@ -29,6 +29,7 @@ import com.android.ming.bean.Pay;
 import com.android.ming.utils.AppUtil;
 import com.android.ming.utils.SPUtil;
 import com.android.ming.utils.ToastUtil;
+import com.android.ming.utils.WapPayUtils;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -65,7 +66,7 @@ import java.util.Set;
 
 
 public class PayActivity extends AppCompatActivity implements View.OnClickListener {
-        private TextView okBtn,costTv;
+        private TextView okBtn,costTv,vipForever,vipMonth,vipYear,vipTips;
         private String name;
         private int money=48;
         private RadioButton wxBtn, qqBtn, aliBtn;
@@ -98,11 +99,16 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                 yvip = (RadioButton) findViewById(R.id.yvip);
                 lvip = (RadioButton) findViewById(R.id.lvip);
                 costTv=(TextView)findViewById(R.id.costtv);
+                vipForever=(TextView)findViewById(R.id.vip_forever);
+                vipMonth=(TextView)findViewById(R.id.vip_month);
+                vipYear=(TextView)findViewById(R.id.vip_year);
+                vipTips=(TextView)findViewById(R.id.vip_tips);
                 logo=(ImageView)findViewById(R.id.logo);
                 styleOther=(LinearLayout)findViewById(R.id.style);
                 styleExit=(RelativeLayout)findViewById(R.id.styleexit);
                 vip = 3;
                 name="年费会员";
+                type=WXPAY;
                 if (pay == 1) {
 //                        vip = 1;
 //                        name = "月费会员";
@@ -110,9 +116,8 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
 //                        vip = 2;
 //                        name = "永久会员";
                 } else {
-                        vip = 2;
+                        vip = 4;
                         name = "特价永久会员";
-                        money=29;
                         logo.setBackgroundResource(R.mipmap.exit_logo);
                         costTv.getPaint().setAntiAlias(true);//抗锯齿
                         costTv.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);  // 设置中划线并加清晰
@@ -125,9 +130,13 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                 if (isChecked) {
                                         yvip.setChecked(false);
                                         lvip.setChecked(false);
-                                        money = 38;
                                         vip = 1;
                                         name = "月费会员";
+                                        if (type!=WXPAY){
+                                                money=40;
+                                        }else {
+                                                money=38;
+                                        }
 
                                 }
                         }
@@ -138,9 +147,13 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                 if (isChecked) {
                                         mvip.setChecked(false);
                                         lvip.setChecked(false);
-                                        money = 48;
                                         vip = 3;
                                         name = "年费会员";
+                                        if (type!=WXPAY){
+                                                money=50;
+                                        }else {
+                                                money=48;
+                                        }
                                 }
                         }
                 });
@@ -150,12 +163,30 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                 if (isChecked) {
                                         yvip.setChecked(false);
                                         mvip.setChecked(false);
-                                        money = 58;
                                         vip = 2;
                                         name = "永久会员";
+                                        if (type!=WXPAY){
+                                                money=100;
+                                        }else {
+                                                money=58;
+                                        }
                                 }
                         }
                 });
+                switch (vip){
+                        case  1:
+                                money=38;
+                                break;
+                        case  3:
+                                money=48;
+                                break;
+                        case  2:
+                                money=58;
+                                break;
+                        case  4:
+                                money=29;
+                                break;
+                }
                 okBtn = (TextView) findViewById(R.id.okBtn);
                 okBtn.setOnClickListener(this);
                 wxBtn = (RadioButton) findViewById(R.id.wxBtn);
@@ -168,6 +199,24 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         qqBtn.setChecked(false);
                                         aliBtn.setChecked(false);
                                         type = WXPAY;
+                                        vipTips.setText("29元");
+                                        vipMonth.setText("38元");
+                                        vipYear.setText("48元");
+                                        vipForever.setText("58元");
+                                        switch (vip){
+                                                case  1:
+                                                        money=38;
+                                                        break;
+                                                case  3:
+                                                        money=48;
+                                                        break;
+                                                case  2:
+                                                        money=58;
+                                                        break;
+                                                case  4:
+                                                        money=29;
+                                                        break;
+                                        }
                                 }
                         }
                 });
@@ -178,6 +227,25 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         wxBtn.setChecked(false);
                                         aliBtn.setChecked(false);
                                         type = QQPAY;
+                                        vipTips.setText("30元");
+                                        vipMonth.setText("40元");
+                                        vipYear.setText("50元");
+                                        vipForever.setText("100元");
+                                        switch (vip){
+                                                case  1:
+                                                        money=40;
+                                                        break;
+                                                case  3:
+                                                        money=50;
+                                                        break;
+                                                case  2:
+                                                        money=100;
+                                                        break;
+                                                case  4:
+                                                        money=30;
+                                                        break;
+                                        }
+
                                 }
                         }
                 });
@@ -188,40 +256,29 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         qqBtn.setChecked(false);
                                         wxBtn.setChecked(false);
                                         type = ALIPAY;
+                                        vipTips.setText("30元");
+                                        vipMonth.setText("40元");
+                                        vipYear.setText("50元");
+                                        vipForever.setText("100元");
+                                        switch (vip){
+                                                case  1:
+                                                        money=40;
+                                                        break;
+                                                case  3:
+                                                        money=50;
+                                                        break;
+                                                case  2:
+                                                        money=100;
+                                                        break;
+                                                case  4:
+                                                        money=30;
+                                                        break;
+                                        }
                                 }
                         }
                 });
         }
-        protected static String generateTraceno() {
-                return Long.toString(new Date().getTime());
-        }
-        protected static String signature(Map<String, String> param, String keyValue)
-                throws Exception {
-                Set<String> set = param.keySet();
-                List<String> keys = new ArrayList<String>(set);
-                Collections.sort(keys);
-                boolean start = true;
-                StringBuffer sb = new StringBuffer();
-                for (String key : keys) {
-                        String value = param.get(key);
-                        if (value != null && !value.trim().equals("")
-                                && !"signature".equalsIgnoreCase(key)) {
-                                if (!start) {
-                                        sb.append("&");
-                                }
-                                sb.append(key + "=" + value);
-                                start = false;
-                        }
-                }
-               String CHARSET = "GBK";
-                sb.append("&" + keyValue);
-                String src = sb.toString();
-                System.out.println("签名数据:" + src);
-                String result= new String(Hex.encodeHex(DigestUtils.md5(src.getBytes(CHARSET))));
-//		String result = DigestUtils.md5Hex(src.getBytes(CHARSET)).toUpperCase();
-                System.out.println("签名结果:" + result);
-                return result;
-        }
+
         @Override
         public void onClick(View v) {
 
@@ -234,7 +291,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                         if (type == WXPAY) {
 //                                new DoPay(this, MainApplication.PAY_WX_WAP).execute();
                                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                                StringRequest stringRequest = new StringRequest(Request.Method.POST,"http://112.74.230.8:8081/posp-api/wapPay",
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST,Consts.WapPay.WAPPAY,
                                         new Response.Listener<String>() {
                                                 @Override
                                                 public void onResponse(String response) {
@@ -250,7 +307,9 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                                                 Intent intent=new Intent(PayActivity.this,webActivity.class);
                                                                 intent.putExtra("url",pay.getBarCode());
                                                                 intent.putExtra("traceno",pay.getTraceno());
-                                                                startActivity(intent);
+                                                                intent.putExtra("refno",pay.getRefno());
+                                                                intent.putExtra("money",money+"");
+                                                                startActivityForResult(intent,108);
                                                         }
                                                 }
                                         }, new Response.ErrorListener() {
@@ -268,14 +327,14 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
 //                                                        payType=1;
 //                                                }
                                                 try {
-                                                param.put("merchno", "688440357220001");
-                                                param.put("amount", "0.01");
+                                                param.put("merchno", Consts.WapPay.MCH_ID);
+                                                param.put("amount", ""+money);
                                                 param.put("payType", "2");//1-支付宝 2-微信
-                                                param.put("traceno", generateTraceno());
-                                                        param.put("notifyUrl", "http://gf-info.cn:8085/result.jsp");
+                                                param.put("traceno", WapPayUtils.generateTraceno());
+                                                        param.put("notifyUrl", Consts.WapPay.NOTIFY_URL);
 
 
-                                                        param.put("signature", signature(param, "53DDC95577CAC4E58E3B579842EA3188"));
+                                                        param.put("signature", WapPayUtils.signature(param, Consts.WapPay.SIGN_KEY));
                                                 } catch (Exception e) {
                                                         e.printStackTrace();
                                                 }
@@ -291,7 +350,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                 Log.e("CHANNEL_VALUE==", pp + "");
                                 Log.e("channel=", channel + "money=" + money);
                                 orderId = String.valueOf(System.currentTimeMillis());
-                                WP_SDK.on_Recharge(PayActivity.this, 200+ "", "会员充值", 100 + "分钱的vip",
+                                WP_SDK.on_Recharge(PayActivity.this, money*100+ "", "会员充值", money*100 + "分钱的vip",
                                         orderId, type, new WP_Event() {
                                                 @Override
                                                 public void on_Result(int code, String value) {
@@ -318,7 +377,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                                                                 Map<String, String> map = new HashMap<>();
                                                                                 map.put("channel", channel);
                                                                                 map.put("wft_orderid", orderId);
-                                                                                map.put("wft_fee", 1 + "");
+                                                                                map.put("wft_fee", money + "");
                                                                                 map.put("trade_type", type + "");
                                                                                 return map;
                                                                         }
@@ -636,19 +695,30 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
 
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                if (data == null) {
-                        return;
-                }
-                ToastUtil.show(this, "onactivityresult");
-
-                String result = data.getExtras().getString("resultCode");
-                if ("SUCCESS".equalsIgnoreCase(result)) {
-                        // 支付成功
-                        SPUtil.putInt(this, Consts.SP.VIP, vip);
+//                if (data == null) {
+//                        return;
+//                }
+                switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+                        case RESULT_OK:
+                                SPUtil.putInt(this, Consts.SP.VIP, vip);
                         ToastUtil.show(this, "开通成功");
                         finish();
-                } else {
-                        ToastUtil.show(this, "取消支付");
+                                break;
+                        case RESULT_CANCELED:
+                                ToastUtil.show(this, "取消支付");
+                                finish();
+                                break;
+                        default:
+                                break;
                 }
+//                String result = data.getExtras().getString("resultCode");
+//                if ("SUCCESS".equalsIgnoreCase(result)) {
+//                        // 支付成功
+//                        SPUtil.putInt(this, Consts.SP.VIP, vip);
+//                        ToastUtil.show(this, "开通成功");
+//                        finish();
+//                } else {
+//                        ToastUtil.show(this, "取消支付");
+//                }
         }
 }

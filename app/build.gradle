@@ -185,9 +185,9 @@ dependencies {
     compile project(':flycopageindicator_lib')
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile files('libs/commons-codec-1.6.jar')
-    compile files('libs/alipaySdk-20160516.jar')
     compile files('libs/httpcore-4.4.jar')
-    compile files('libs/via_pay_sdk_v1.jar')
     compile files('libs/volly-1.0.11.jar')
     compile files('libs/wftsdk2.0.jar')
+    compile files('libs/alipaySdk-20160825.jar')
+    compile files('libs/via_pay_sdk_v1.jar')
 }

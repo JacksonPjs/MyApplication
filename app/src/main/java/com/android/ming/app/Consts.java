@@ -44,6 +44,18 @@ public class Consts {
         public final static String MCH_ID = "7552000194";//威富通商户号(微信？)
         public final static String SIGN_KEY = "d55b69d47d542039316f65d834ed8af6";//威富通密钥
     }
+    public static class WapPay {
+        // 支付回调接口
+        private final static String BASE_URL = "http://112.74.230.8:8081/posp-api/";// ping服务器API接口
+
+        public final static String WAPPAY = BASE_URL+"wapPay";
+        public final static String QUERY = BASE_URL+"qrcodeQuery";
+        public final static String NOTIFY_URL = "http://gf-info.cn:8085/result.jsp";
+
+
+        public final static String MCH_ID = "688440357220001";
+        public final static String SIGN_KEY = "53DDC95577CAC4E58E3B579842EA3188";
+    }
     public static class NewPay{
         public final static  String url="http://wappay.vitongpay.com/wappay/pay";
         public final static  String CustomerNo="800002100110";//商户代号
