@@ -3,6 +3,7 @@ package com.android.ming.ui.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +13,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -42,8 +45,22 @@ import com.google.gson.reflect.TypeToken;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.http.util.ByteArrayBuffer;
+import org.apache.http.util.EncodingUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -75,50 +92,106 @@ public class webActivity extends AppCompatActivity {
         refno = intent.getStringExtra("refno");
         money = intent.getStringExtra("money");
         webView.setBackgroundColor(0);
-        WebSettings webSettings = webView.getSettings();
-//        webSettings.setSavePassword(false);
-//        webSettings.setSaveFormData(false);
-        webSettings.setJavaScriptEnabled(true);
-//        webSettings.setSupportZoom(false);
-//        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-//
-//
-////        webView.setWebChromeClient(new MyWebChromeClient());
-//        webView.setWebViewClient(new WebViewClient(){
-//
+//        WebSettings webSettings = webView.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
+//        webView.setWebChromeClient(new WebChromeClient(){
 //            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url1) {
-////                webView.loadUrl(url);
-//                return true;
-//            }
+//            public void onProgressChanged(WebView view, int newProgress) {
+//                super.onProgressChanged(view, newProgress);
+//                if (newProgress==100){
+////
+//                    PayActivity.ProgressDialogDismiss();
 //
-//            @Override
-//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//                super.onPageStarted(view, url, favicon);
-//                mProgressDialog.show();
-//            }
-//
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//                super.onPageFinished(view, url);
-//                mProgressDialog.hide();
+//                }
 //            }
 //        });
-        /*
-         * DemoJavaScriptInterface类为js调用android服务器端提供接口
-         * android 作为DemoJavaScriptInterface类的客户端接口被js调用
-         * 调用的具体方法在DemoJavaScriptInterface中定义：
-         * 例如该实例中的clickOnAndroid
-         */
         isShow=false;
-//        webView.addJavascriptInterface(new DemoJavaScriptInterface(), "androd");
-//        webView.loadUrl("https://www.baidu.com/");
-        webView.loadUrl(url);
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                String html =
+                 getHtmlString(url);
+//                Log.e("tesoo",html.toString());
+                Document document=Jsoup.parse(html);
+              Element element= document.getElementById("cli");
+                String s=element.attr("href");
+             String ur=   URLDecoder.decode(s);
+                Log.e("wtf",document.toString());
+                Log.e("wtfs",s);
+                Log.e("wtfu",ur);
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(ur);
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        }.start();
+//                    String html =
+//                            getHtmlString("http://blog.csdn.net/u010142437");
+//                    // 再使用第一种方式
+//                    Log.e("tesoo",html);
+//        Document doc = Jsoup.parse(html);
+////         handler.sendEmptyMessage(0);
+
+//    handler.sendEmptyMessage(0);
+//        webView.loadUrl(url);
 
 
 
 
     }
+
+
+    /**
+     * 使用URLConnection根据url读取html源代码
+     *
+     * @param urlString
+     * @return
+     */
+    private String getHtmlString(String urlString) {
+        try {
+            URL url = new URL(urlString);
+            URLConnection ucon = url.openConnection();
+            InputStream instr = ucon.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(instr);
+            ByteArrayBuffer bau = new ByteArrayBuffer(500);
+            int current = 0;
+            while ((current = bis.read()) != -1) {
+                bau.append((byte) current);
+            }
+            return EncodingUtils.getString(bau.toByteArray(), "utf_8");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            try {
+                URL url1 = new URL(url);
+                InputStream in = url1.openStream();
+                byte buff[] = new byte[1024];
+                ByteArrayOutputStream fromFile = new ByteArrayOutputStream();
+                FileOutputStream out = null;
+                do {
+                    int numread = in.read(buff);
+                    if (numread <= 0) {
+                        break;
+                    }
+                    fromFile.write(buff, 0, numread);
+                } while (true);
+                String wholeJS = fromFile.toString();
+                Log.e("wholejs",wholeJS);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
 //        final class DemoJavaScriptInterface {
 //            DemoJavaScriptInterface() {
 //            }

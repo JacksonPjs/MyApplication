@@ -95,6 +95,8 @@
 
 #-keep class com.iapppay.**{*;}
 -keep class com.wo.**{*;}
+-keep class com.wo.**{*;}
+-keep class org.apache.http.**{*;}
 #如果引用了v4或者v7包
 -dontwarn android.support.**
 

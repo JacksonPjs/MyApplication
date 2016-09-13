@@ -84,7 +84,7 @@
             android:layout_marginLeft="25dp"
             android:gravity="center_vertical"
             android:textSize="16sp"
-            android:text="38元" />
+            android:text="40元" />
 
         <RadioButton
             android:id="@+id/mvip"
@@ -120,7 +120,7 @@
             android:layout_marginLeft="25dp"
             android:gravity="center_vertical"
             android:textSize="16sp"
-            android:text="48元" />
+            android:text="50元" />
 
         <RadioButton
             android:id="@+id/yvip"
@@ -157,7 +157,7 @@
             android:layout_marginLeft="25dp"
             android:gravity="center_vertical"
             android:textSize="16sp"
-            android:text="58元" />
+            android:text="100元" />
 
         <RadioButton
             android:id="@+id/lvip"
