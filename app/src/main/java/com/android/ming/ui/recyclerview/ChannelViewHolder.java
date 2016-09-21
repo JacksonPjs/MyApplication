@@ -20,6 +20,6 @@ public class ChannelViewHolder extends BaseViewHolder {
         super(itemView, listener);
         face = (ImageView) itemView.findViewById(R.id.face);
         title = (TextView) itemView.findViewById(R.id.title);
-        update = (TextView) itemView.findViewById(R.id.update);
+//        update = (TextView) itemView.findViewById(R.id.update);
     }
 }

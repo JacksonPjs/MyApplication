@@ -97,6 +97,7 @@
         <activity
             android:name="com.android.ming.ui.activity.PayActivity"
             android:theme="@style/AppTheme.pay"
+            android:launchMode="singleTask"
             />
 
         <activity android:name="com.android.ming.ui.activity.ListActivity"/>
@@ -118,6 +119,11 @@
         <activity
             android:name=".ui.activity.SearchFailActivity"
             android:launchMode="singleTask"
+            ></activity>
+  <activity
+            android:name=".ui.activity.NewPayActivity"
+            android:launchMode="singleTask"
+      android:theme="@style/AppTheme.pay"
             ></activity>
 
         <!-- 支付开始 -->

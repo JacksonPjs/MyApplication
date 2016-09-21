@@ -29,11 +29,13 @@ public class UserModel {
         String vipName;
         if (vip == 1) {
             vipName = "月费会员";
-        } else if (vip == 2) {
+        } else if (vip == 2||vip==4) {
             vipName = "永久会员";
         } else if (vip == 3) {
             vipName = "年费会员";
-        } else {
+        } else if (vip==5){
+            vipName = "vip会员";
+        }else {
             vipName = "未开通";
         }
         vipSet.setValue(vipName);

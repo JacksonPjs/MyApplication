@@ -30,9 +30,10 @@ public class ChannelAdapter extends BaseRecyclerAdapter<Channel, ChannelViewHold
     @Override
     public void onBindViewHolder(ChannelViewHolder holder, int position) {
         Channel channel = getItem(position);
-        ImageLoader.ImageListener listener = ImageLoader.getImageListener(holder.face, R.mipmap.video_loading, R.mipmap.video_loading);
-        activity.getImageLoader().get(channel.getFace()+"", listener);
-        holder.title.setText(channel.getTitle());
+            ImageLoader.ImageListener listener = ImageLoader.getImageListener(holder.face, R.mipmap.video_loading, R.mipmap.video_loading);
+            activity.getImageLoader().get(channel.getFace() + "", listener);
+            holder.title.setText(channel.getTitle());
+
 //        holder.update.setText(String.format("今日更新%d部", channel.getUpdate()));
     }
 

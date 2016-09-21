@@ -38,6 +38,12 @@ public class ChannelPresenter {
                 try {
                     List<Channel> channels = gson.fromJson(s, new TypeToken<List<Channel>>() {
                     }.getType());
+                    for (int i=0;i<channels.size();i++){
+                        Channel channel=channels.get(i);
+                        if (channel.getId()==102){
+                            channels.remove(i);
+                        }
+                    }
                     view.showList(channels);
                 } catch (Exception e) {
                     view.showError("解析数据出错");

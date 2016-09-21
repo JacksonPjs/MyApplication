@@ -16,6 +16,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.ming.R;
 import com.android.ming.app.Consts;
@@ -24,6 +25,7 @@ import com.android.ming.bean.Video;
 import com.android.ming.presenter.HomePresenter;
 import com.android.ming.presenter.ListPresenter;
 import com.android.ming.ui.activity.MainActivity;
+import com.android.ming.ui.activity.NewPayActivity;
 import com.android.ming.ui.activity.PayActivity;
 import com.android.ming.ui.activity.VideoActivity;
 import com.android.ming.ui.activity.VideoplayAty;
@@ -147,10 +149,20 @@ public class VideoFragment extends Fragment implements IListView,View.OnClickLis
                                         @Override
                                         public void onClick(View v) {
 //                                                                startActivity(VideoActivity.createIntent(activity, banne.get(position).getId()));
-                                                if (SPUtil.getInt(activity, Consts.SP.VIP) > 0) {// 如果为免已付费，即可观看
-                                                        startActivity(VideoplayAty.createIntent(activity, banne.get(position).getUrl(), false, false));
+                                                if (SPUtil.getInt(activity, Consts.SP.VIP) > 0) {
+                                                        if (SPUtil.getInt(activity, Consts.SP.VIP) == 5){
+                                                                Log.e("viplv",SPUtil.getInt(activity, Consts.SP.VIP)+"");
+                                                                startActivity(VideoplayAty.createIntent(activity, banne.get(position).getUrl(), false, false));
+                                                        }else {
+                                                                PayActivity.createInstance(activity, 5);
+                                                        }
+
+
                                                 } else {
-                                                        PayActivity.createInstance(activity, 1);
+                                                        Toast.makeText(getActivity(),"请先开通会员",Toast.LENGTH_SHORT).show();
+                                                        NewPayActivity.createInstance(activity);
+
+
                                                 }
 
                                         }
@@ -193,6 +205,22 @@ public class VideoFragment extends Fragment implements IListView,View.OnClickLis
                         @Override
                         public void onPageSelected(int position) {
                                 pos=position;
+                                if(position==videos.size()-1){
+                                        if (SPUtil.getInt(activity, Consts.SP.VIP) > 0) {
+                                                if (SPUtil.getInt(activity, Consts.SP.VIP) == 5){
+
+                                                }else {
+                                                        PayActivity.createInstance(activity, 5);
+                                                }
+
+
+                                        } else {
+                                                Toast.makeText(getActivity(),"请先开通会员",Toast.LENGTH_SHORT).show();
+                                                NewPayActivity.createInstance(activity);
+
+
+                                        }
+                                }
                                 viewPager.setCurrentItem(position);
                                 ImageRequest imageRequest = new ImageRequest(
                                         banne.get(pos).getFace(),
@@ -218,10 +246,19 @@ public class VideoFragment extends Fragment implements IListView,View.OnClickLis
                 banner.setOnItemClickL(new BaseBanner.OnItemClickL() {
                         @Override
                         public void onItemClick(int position) {
-                                if (SPUtil.getInt(activity, Consts.SP.VIP) > 0) {// 如果为免已付费，即可观看
-                                        startActivity(VideoplayAty.createIntent(activity, banne.get(position).getUrl(), false, false));
+                                if (SPUtil.getInt(activity, Consts.SP.VIP) > 0) {
+                                        if (SPUtil.getInt(activity, Consts.SP.VIP) == 5){
+                                                startActivity(VideoplayAty.createIntent(activity, banne.get(position).getUrl(), false, false));
+                                        }else {
+                                                PayActivity.createInstance(activity, 5);
+                                        }
+
+
                                 } else {
-                                        PayActivity.createInstance(activity, 1);
+                                        Toast.makeText(getActivity(),"请先开通会员",Toast.LENGTH_SHORT).show();
+                                        NewPayActivity.createInstance(activity);
+
+
                                 }
                         }
                 });
@@ -263,6 +300,7 @@ public class VideoFragment extends Fragment implements IListView,View.OnClickLis
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
 
         }
 

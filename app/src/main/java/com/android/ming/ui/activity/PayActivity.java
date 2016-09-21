@@ -38,7 +38,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.switfpass.pay.MainApplication;
 import com.wo.main.WP_SDK;
 import com.wo.plugin.WP_Event;
 
@@ -54,7 +53,7 @@ import java.util.Map;
 public class PayActivity extends AppCompatActivity implements View.OnClickListener {
         private TextView okBtn,costTv,vipForever,vipMonth,vipYear,vipTips;
         private String name;
-        private int money=50;
+        private int money=48;
         private RadioButton wxBtn, qqBtn, aliBtn;
         private RadioButton mvip, yvip, lvip;
         private int vip;// 会员类型
@@ -64,7 +63,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
         int WXPAY = 0;//微信支付
         int QQPAY = 3;//qq支付
         int ALIPAY = 2;//支付宝支付
-        RelativeLayout styleExit;
+        RelativeLayout styleExit,styleNew,newtip;
         LinearLayout styleOther;
         ImageView logo;
         private static ProgressDialog myDialog;
@@ -94,6 +93,9 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                 logo=(ImageView)findViewById(R.id.logo);
                 styleOther=(LinearLayout)findViewById(R.id.style);
                 styleExit=(RelativeLayout)findViewById(R.id.styleexit);
+                styleNew=(RelativeLayout)findViewById(R.id.stylenew);
+                newtip=(RelativeLayout)findViewById(R.id.newtip);
+                newtip.setVisibility(View.GONE);
                 vip = 3;
                 name="年费会员";
                 type=WXPAY;
@@ -103,7 +105,15 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                 } else if (pay == 2) {
 //                        vip = 2;
 //                        name = "永久会员";
-                } else {
+                } else if (pay == 5){
+                        vip = 5;
+                        name = "vip会员";
+                        logo.setBackgroundResource(R.mipmap.pay_logo);
+                        styleExit.setVisibility(View.GONE);
+                        styleNew.setVisibility(View.VISIBLE);
+                        newtip.setVisibility(View.VISIBLE);
+                        styleOther.setVisibility(View.GONE);
+                }else {
                         vip = 4;
                         name = "特价永久会员";
                         logo.setBackgroundResource(R.mipmap.exit_logo);
@@ -111,6 +121,8 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                         costTv.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG|Paint.ANTI_ALIAS_FLAG);  // 设置中划线并加清晰
                         styleExit.setVisibility(View.VISIBLE);
                         styleOther.setVisibility(View.GONE);
+                        styleNew.setVisibility(View.GONE);
+
                 }
                 mvip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
@@ -120,11 +132,11 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         lvip.setChecked(false);
                                         vip = 1;
                                         name = "月费会员";
-//                                        if (type!=WXPAY){
+                                        if (type!=WXPAY){
                                                 money=40;
-//                                        }else {
-//                                                money=38;
-//                                        }
+                                        }else {
+                                                money=38;
+                                        }
 
                                 }
                         }
@@ -137,11 +149,11 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         lvip.setChecked(false);
                                         vip = 3;
                                         name = "年费会员";
-//                                        if (type!=WXPAY){
+                                        if (type!=WXPAY){
                                                 money=50;
-//                                        }else {
-//                                                money=48;
-//                                        }
+                                        }else {
+                                                money=48;
+                                        }
                                 }
                         }
                 });
@@ -153,28 +165,31 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         mvip.setChecked(false);
                                         vip = 2;
                                         name = "永久会员";
-//                                        if (type!=WXPAY){
+                                        if (type!=WXPAY){
                                                 money=100;
-//                                        }else {
-//                                                money=58;
-//                                        }
+                                        }else {
+                                                money=58;
+                                        }
                                 }
                         }
                 });
-//                switch (vip){
-//                        case  1:
-//                                money=38;
-//                                break;
-//                        case  3:
-//                                money=48;
-//                                break;
-//                        case  2:
-//                                money=58;
-//                                break;
-//                        case  4:
-//                                money=29;
-//                                break;
-//                }
+                switch (vip){
+                        case  1:
+                                money=38;
+                                break;
+                        case  3:
+                                money=48;
+                                break;
+                        case  2:
+                                money=58;
+                                break;
+                        case  4:
+                                money=29;
+                                break;
+                        case  5:
+                                money=20;
+                                break;
+                }
                 okBtn = (TextView) findViewById(R.id.okBtn);
                 okBtn.setOnClickListener(this);
                 wxBtn = (RadioButton) findViewById(R.id.wxBtn);
@@ -187,24 +202,27 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         qqBtn.setChecked(false);
                                         aliBtn.setChecked(false);
                                         type = WXPAY;
-//                                        vipTips.setText("29元");
-//                                        vipMonth.setText("38元");
-//                                        vipYear.setText("48元");
-//                                        vipForever.setText("58元");
-//                                        switch (vip){
-//                                                case  1:
-//                                                        money=38;
-//                                                        break;
-//                                                case  3:
-//                                                        money=48;
-//                                                        break;
-//                                                case  2:
-//                                                        money=58;
-//                                                        break;
-//                                                case  4:
-//                                                        money=29;
-//                                                        break;
-//                                        }
+                                        vipTips.setText("29元");
+                                        vipMonth.setText("38元");
+                                        vipYear.setText("48元");
+                                        vipForever.setText("58元");
+                                        switch (vip){
+                                                case  1:
+                                                        money=38;
+                                                        break;
+                                                case  3:
+                                                        money=48;
+                                                        break;
+                                                case  2:
+                                                        money=58;
+                                                        break;
+                                                case  4:
+                                                        money=29;
+                                                        break;
+                                                case  5:
+                                                        money=20;
+                                                        break;
+                                        }
                                 }
                         }
                 });
@@ -215,24 +233,27 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         wxBtn.setChecked(false);
                                         aliBtn.setChecked(false);
                                         type = QQPAY;
-//                                        vipTips.setText("30元");
-//                                        vipMonth.setText("40元");
-//                                        vipYear.setText("50元");
-//                                        vipForever.setText("100元");
-//                                        switch (vip){
-//                                                case  1:
-//                                                        money=40;
-//                                                        break;
-//                                                case  3:
-//                                                        money=50;
-//                                                        break;
-//                                                case  2:
-//                                                        money=100;
-//                                                        break;
-//                                                case  4:
-//                                                        money=30;
-//                                                        break;
-//                                        }
+                                        vipTips.setText("30元");
+                                        vipMonth.setText("40元");
+                                        vipYear.setText("50元");
+                                        vipForever.setText("100元");
+                                        switch (vip){
+                                                case  1:
+                                                        money=40;
+                                                        break;
+                                                case  3:
+                                                        money=50;
+                                                        break;
+                                                case  2:
+                                                        money=100;
+                                                        break;
+                                                case  4:
+                                                        money=30;
+                                                        break;
+                                                case  5:
+                                                        money=20;
+                                                        break;
+                                        }
 
                                 }
                         }
@@ -244,24 +265,27 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                         qqBtn.setChecked(false);
                                         wxBtn.setChecked(false);
                                         type = ALIPAY;
-//                                        vipTips.setText("30元");
-//                                        vipMonth.setText("40元");
-//                                        vipYear.setText("50元");
-//                                        vipForever.setText("100元");
-//                                        switch (vip){
-//                                                case  1:
-//                                                        money=40;
-//                                                        break;
-//                                                case  3:
-//                                                        money=50;
-//                                                        break;
-//                                                case  2:
-//                                                        money=100;
-//                                                        break;
-//                                                case  4:
-//                                                        money=30;
-//                                                        break;
-//                                        }
+                                        vipTips.setText("30元");
+                                        vipMonth.setText("40元");
+                                        vipYear.setText("50元");
+                                        vipForever.setText("100元");
+                                        switch (vip){
+                                                case  1:
+                                                        money=40;
+                                                        break;
+                                                case  3:
+                                                        money=50;
+                                                        break;
+                                                case  2:
+                                                        money=100;
+                                                        break;
+                                                case  4:
+                                                        money=30;
+                                                        break;
+                                                case  5:
+                                                        money=20;
+                                                        break;
+                                        }
                                 }
                         }
                 });
@@ -274,75 +298,75 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
 
 
 
-//                        // 请求计费类型 0:微信;1:银联;2:神州付;3:QQ支付;
-//                        if (type == WXPAY) {
-//                                MyDialog.circle(PayActivity.this);
+                        // 请求计费类型 0:微信;1:银联;2:神州付;3:QQ支付;
+                        if (type == WXPAY) {
+                                MyDialog.circle(PayActivity.this);
+
+                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST,Consts.WapPay.WAPPAY,
+                                        new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                        Gson gson=new Gson();
 //
-//                                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-//                                StringRequest stringRequest = new StringRequest(Request.Method.POST,Consts.WapPay.WAPPAY,
-//                                        new Response.Listener<String>() {
-//                                                @Override
-//                                                public void onResponse(String response) {
-//                                                        Gson gson=new Gson();
-////
-//                                                        final Pay pay=gson.fromJson(response,new TypeToken<Pay>(){}.getType());
-//                                                        if (pay.getRespCode().equals("00")) {
-//                                                               String url=pay.getBarCode();
-//                                                                traceno=pay.getTraceno();
-//                                                                refno=pay.getRefno();
-//                                                                new DoPay(PayActivity.this, url).execute();
-////                                                                new Thread(){
-////                                                                        @Override
-////                                                                        public void run() {
-////                                                                                super.run();
-////                                                                                String html = HtmlUtils.getHtmlString(url);
-////                                                                                Document document= Jsoup.parse(html);
-////                                                                                Element element= document.getElementById("cli");
-////                                                                                String s=element.attr("href");
-////                                                                                String ur=   URLDecoder.decode(s);
-////                                                                                Intent intent = new Intent();
-////                                                                                intent.setAction("android.intent.action.VIEW");
-////                                                                                Uri content_url = Uri.parse(ur);
-////                                                                                intent.setData(content_url);
-////                                                                                startActivityForResult(intent,108);
-////                                                                        }
-////                                                                }.start();
-////
-//                                                        }
+                                                        final Pay pay=gson.fromJson(response,new TypeToken<Pay>(){}.getType());
+                                                        if (pay.getRespCode().equals("00")) {
+                                                                String url=pay.getBarCode();
+                                                                traceno=pay.getTraceno();
+                                                                refno=pay.getRefno();
+                                                                new DoPay(PayActivity.this, url).execute();
+//                                                                new Thread(){
+//                                                                        @Override
+//                                                                        public void run() {
+//                                                                                super.run();
+//                                                                                String html = HtmlUtils.getHtmlString(url);
+//                                                                                Document document= Jsoup.parse(html);
+//                                                                                Element element= document.getElementById("cli");
+//                                                                                String s=element.attr("href");
+//                                                                                String ur=   URLDecoder.decode(s);
+//                                                                                Intent intent = new Intent();
+//                                                                                intent.setAction("android.intent.action.VIEW");
+//                                                                                Uri content_url = Uri.parse(ur);
+//                                                                                intent.setData(content_url);
+//                                                                                startActivityForResult(intent,108);
+//                                                                        }
+//                                                                }.start();
+//
+                                                        }
+                                                }
+                                        }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                                Log.e("res",error.toString());
+                                        }
+                                }) {
+                                        @Override
+                                        protected Map<String, String> getParams() {
+                                                //在这里设置需要post的参数
+                                                Map<String, String> param = new HashMap<>();
+//                                                int payType=2;
+//                                                if (type==ALIPAY){
+//                                                        payType=1;
 //                                                }
-//                                        }, new Response.ErrorListener() {
-//                                        @Override
-//                                        public void onErrorResponse(VolleyError error) {
-//                                                Log.e("res",error.toString());
-//                                        }
-//                                }) {
-//                                        @Override
-//                                        protected Map<String, String> getParams() {
-//                                                //在这里设置需要post的参数
-//                                                Map<String, String> param = new HashMap<>();
-////                                                int payType=2;
-////                                                if (type==ALIPAY){
-////                                                        payType=1;
-////                                                }
-//                                                try {
-//                                                param.put("merchno", Consts.WapPay.MCH_ID);
-//                                                param.put("amount", ""+0.01);
-//                                                param.put("payType", "2");//1-支付宝 2-微信
-//                                                param.put("traceno", WapPayUtils.generateTraceno());
-//                                                        param.put("notifyUrl", Consts.WapPay.NOTIFY_URL);
-//
-//
-//                                                        param.put("signature", WapPayUtils.signature(param, Consts.WapPay.SIGN_KEY));
-//                                                } catch (Exception e) {
-//                                                        e.printStackTrace();
-//                                                }
-//                                                return param;
-//                                        }
-//                                };
-//
-//                                requestQueue.add(stringRequest);
-//
-//                        } else {
+                                                try {
+                                                        param.put("merchno", Consts.WapPay.MCH_ID);
+                                                        param.put("amount", ""+0.02);
+                                                        param.put("payType", "2");//1-支付宝 2-微信
+                                                        param.put("traceno", WapPayUtils.generateTraceno());
+                                                        param.put("notifyUrl", Consts.WapPay.NOTIFY_URL);
+
+
+                                                        param.put("signature", WapPayUtils.signature(param, Consts.WapPay.SIGN_KEY));
+                                                } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                }
+                                                return param;
+                                        }
+                                };
+
+                                requestQueue.add(stringRequest);
+
+                        } else {
                                 channel = AppUtil.getMetaData(this, "UMENG_CHANNEL");
                                 String pp = AppUtil.getMetaData(this, "CHANNEL_VALUE");
                                 Log.e("CHANNEL_VALUE==", pp + "");
@@ -388,7 +412,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                                                         }
                                                 }
                                         });
-//                        }
+                        }
                 }
         }
 
